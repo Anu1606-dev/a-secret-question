@@ -1,11 +1,12 @@
 /* =========================================================
    A SECRET QUESTION
    Bengali Registry Marriage Edition
+   Fully Responsive CSS
    ========================================================= */
 
 
 /* =========================================================
-   1. ROOT VARIABLES
+   1. ROOT
    ========================================================= */
 
 :root {
@@ -47,11 +48,15 @@
 
 
 html {
+  width: 100%;
+  min-height: 100%;
+
   scroll-behavior: smooth;
 }
 
 
 body {
+  width: 100%;
   min-height: 100vh;
 
   font-family: "Quicksand", sans-serif;
@@ -72,6 +77,8 @@ body {
     var(--off-white);
 
   overflow-x: hidden;
+
+  -webkit-text-size-adjust: 100%;
 }
 
 
@@ -82,12 +89,15 @@ body {
 .app {
   width: 100%;
   min-height: 100vh;
+
   position: relative;
+
+  overflow-x: hidden;
 }
 
 
 /* =========================================================
-   4. DECORATIVE WEDDING ELEMENTS
+   4. DECORATIONS
    ========================================================= */
 
 .wedding-decoration {
@@ -104,7 +114,10 @@ body {
   pointer-events: none;
 
   z-index: 0;
+
+  user-select: none;
 }
+
 
 .decoration-left {
   top: 20px;
@@ -112,6 +125,7 @@ body {
 
   transform: rotate(-20deg);
 }
+
 
 .decoration-right {
   right: 20px;
@@ -141,6 +155,7 @@ body {
   z-index: 1;
 }
 
+
 .page.active {
   display: flex;
 
@@ -151,11 +166,13 @@ body {
 @keyframes pageIn {
   from {
     opacity: 0;
+
     transform: translateY(18px);
   }
 
   to {
     opacity: 1;
+
     transform: translateY(0);
   }
 }
@@ -170,8 +187,8 @@ body {
 
   background:
     linear-gradient(
-      rgba(255, 253, 247, 0.96),
-      rgba(255, 250, 240, 0.96)
+      rgba(255, 253, 247, 0.97),
+      rgba(255, 250, 240, 0.97)
     );
 
   border: 1px solid var(--border);
@@ -189,8 +206,6 @@ body {
   overflow: hidden;
 }
 
-
-/* Gold top line */
 
 .document-card::before {
   content: "";
@@ -249,6 +264,8 @@ h3 {
   font-weight: 400;
 
   color: var(--deep-red);
+
+  overflow-wrap: break-word;
 }
 
 
@@ -272,90 +289,15 @@ h3 {
 
 
 /* =========================================================
-   8. PAGE 1 — DECISION
+   8. BUTTONS
    ========================================================= */
-
-.date-label {
-  margin-top: 12px;
-
-  color: var(--muted);
-
-  font-size: 0.95rem;
-}
-
-
-.decision-card h2 {
-  margin-top: 20px;
-}
-
-
-.decision-subtitle {
-  margin-top: 20px;
-
-  color: var(--muted);
-
-  line-height: 1.7;
-
-  font-size: 0.95rem;
-}
-
-
-.divider {
-  width: 180px;
-
-  margin: 28px auto 0;
-
-  display: flex;
-
-  align-items: center;
-
-  justify-content: center;
-
-  gap: 14px;
-
-  color: var(--gold);
-
-  font-size: 0.8rem;
-}
-
-
-.divider::before,
-.divider::after {
-  content: "";
-
-  height: 1px;
-
-  flex: 1;
-
-  background: var(--light-gold);
-}
-
-
-/* =========================================================
-   9. BUTTONS
-   ========================================================= */
-
-.decision-buttons {
-  margin-top: 35px;
-
-  display: flex;
-
-  justify-content: center;
-
-  align-items: center;
-
-  gap: 15px;
-
-  flex-wrap: wrap;
-
-  min-height: 65px;
-}
-
 
 .btn {
   border: none;
 
   border-radius: 999px;
+
+  min-height: 48px;
 
   padding: 14px 25px;
 
@@ -373,6 +315,10 @@ h3 {
     background 0.25s ease;
 
   letter-spacing: 0.2px;
+
+  -webkit-tap-highlight-color: transparent;
+
+  touch-action: manipulation;
 }
 
 
@@ -410,8 +356,82 @@ h3 {
 }
 
 
-.continue-btn {
-  margin-top: 30px;
+/* =========================================================
+   9. PAGE 1 — DECISION
+   ========================================================= */
+
+.date-label {
+  margin-top: 12px;
+
+  color: var(--muted);
+
+  font-size: 0.95rem;
+}
+
+
+.decision-card h2 {
+  margin-top: 20px;
+}
+
+
+.decision-subtitle {
+  margin-top: 20px;
+
+  color: var(--muted);
+
+  line-height: 1.7;
+
+  font-size: 0.95rem;
+}
+
+
+.divider {
+  width: 180px;
+
+  max-width: 100%;
+
+  margin: 28px auto 0;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 14px;
+
+  color: var(--gold);
+
+  font-size: 0.8rem;
+}
+
+
+.divider::before,
+.divider::after {
+  content: "";
+
+  height: 1px;
+
+  flex: 1;
+
+  background: var(--light-gold);
+}
+
+
+.decision-buttons {
+  margin-top: 35px;
+
+  display: flex;
+
+  justify-content: center;
+
+  align-items: center;
+
+  gap: 15px;
+
+  flex-wrap: wrap;
+
+  min-height: 65px;
 }
 
 
@@ -425,6 +445,8 @@ h3 {
   font-size: 0.85rem;
 
   font-weight: 700;
+
+  line-height: 1.5;
 }
 
 
@@ -438,6 +460,8 @@ h3 {
   letter-spacing: 1px;
 
   color: rgba(56, 39, 42, 0.45);
+
+  overflow-wrap: anywhere;
 }
 
 
@@ -490,6 +514,11 @@ h3 {
   font-size: 0.82rem !important;
 
   color: var(--muted) !important;
+}
+
+
+.continue-btn {
+  margin-top: 30px;
 }
 
 
@@ -574,6 +603,8 @@ h3 {
   font-size: 0.75rem;
 
   font-weight: 700;
+
+  flex-shrink: 0;
 }
 
 
@@ -583,6 +614,8 @@ h3 {
   font-size: 0.87rem;
 
   line-height: 1.65;
+
+  overflow-wrap: break-word;
 }
 
 
@@ -601,8 +634,6 @@ h3 {
   font-weight: 600;
 }
 
-
-/* Official notice */
 
 .official-notice {
   margin-top: 28px;
@@ -664,6 +695,8 @@ h3 {
   font-size: 0.82rem;
 
   font-weight: 700;
+
+  line-height: 1.5;
 }
 
 
@@ -711,11 +744,15 @@ h3 {
   font-size: 0.9rem;
 
   font-weight: 700;
+
+  line-height: 1.5;
 }
 
 
 #fullName {
   width: 100%;
+
+  min-height: 50px;
 
   padding: 14px 16px;
 
@@ -738,6 +775,8 @@ h3 {
   transition:
     border 0.2s ease,
     box-shadow 0.2s ease;
+
+  -webkit-appearance: none;
 }
 
 
@@ -764,6 +803,8 @@ h3 {
   font-size: 0.78rem;
 
   font-weight: 600;
+
+  line-height: 1.5;
 }
 
 
@@ -805,6 +846,10 @@ h3 {
   transition:
     transform 0.25s ease,
     box-shadow 0.25s ease;
+
+  touch-action: manipulation;
+
+  -webkit-tap-highlight-color: transparent;
 }
 
 
@@ -901,6 +946,8 @@ h3 {
   color: var(--muted);
 
   font-size: 0.75rem;
+
+  line-height: 1.5;
 }
 
 
@@ -952,6 +999,8 @@ h3 {
 
 
 .certificate-border {
+  width: 100%;
+
   position: relative;
 
   padding: 55px 45px;
@@ -971,6 +1020,8 @@ h3 {
   align-items: center;
 
   justify-content: center;
+
+  overflow: hidden;
 }
 
 
@@ -1046,6 +1097,8 @@ h3 {
   font-size: clamp(1.6rem, 4vw, 2.3rem);
 
   color: var(--red);
+
+  overflow-wrap: anywhere;
 }
 
 
@@ -1070,6 +1123,8 @@ h3 {
   font-weight: 700;
 
   letter-spacing: 1.5px;
+
+  line-height: 1.5;
 }
 
 
@@ -1087,6 +1142,8 @@ h3 {
   align-items: center;
 
   border-radius: 999px;
+
+  max-width: 100%;
 }
 
 
@@ -1144,6 +1201,8 @@ h3 {
   color: var(--red);
 
   font-size: 0.7rem;
+
+  overflow-wrap: anywhere;
 }
 
 
@@ -1179,7 +1238,8 @@ h3 {
 
   letter-spacing: 8px;
 
-  animation: partyBounce 1.5s ease-in-out infinite;
+  animation:
+    partyBounce 1.5s ease-in-out infinite;
 }
 
 
@@ -1219,6 +1279,8 @@ h3 {
   font-size: 1.4rem;
 
   line-height: 1.7;
+
+  overflow-wrap: anywhere;
 }
 
 
@@ -1228,6 +1290,8 @@ h3 {
   color: var(--muted);
 
   font-size: 0.85rem;
+
+  line-height: 1.6;
 }
 
 
@@ -1246,13 +1310,16 @@ h3 {
   color: var(--muted);
 
   font-size: 0.8rem;
+
+  line-height: 1.5;
 }
 
 
 .gift-reveal {
   margin-top: 40px;
 
-  animation: giftAppear 0.8s ease forwards;
+  animation:
+    giftAppear 0.8s ease forwards;
 }
 
 
@@ -1279,6 +1346,8 @@ h3 {
   font-size: 0.9rem;
 
   font-weight: 700;
+
+  line-height: 1.5;
 }
 
 
@@ -1297,6 +1366,8 @@ h3 {
     confettiFall linear forwards;
 
   pointer-events: none;
+
+  user-select: none;
 }
 
 
@@ -1340,6 +1411,10 @@ h3 {
 
   z-index: 5;
 
+  width: 100%;
+
+  padding: 20px;
+
   text-align: center;
 }
 
@@ -1355,11 +1430,15 @@ h3 {
 @keyframes envelopeFloat {
   0%,
   100% {
-    transform: translateY(0) rotate(-3deg);
+    transform:
+      translateY(0)
+      rotate(-3deg);
   }
 
   50% {
-    transform: translateY(-12px) rotate(3deg);
+    transform:
+      translateY(-12px)
+      rotate(3deg);
   }
 }
 
@@ -1374,6 +1453,8 @@ h3 {
   font-weight: 700;
 
   letter-spacing: 3px;
+
+  line-height: 1.5;
 }
 
 
@@ -1386,7 +1467,10 @@ h3 {
 
   line-height: 1.1;
 
-  animation: kissReveal 1s ease forwards;
+  animation:
+    kissReveal 1s ease forwards;
+
+  overflow-wrap: break-word;
 }
 
 
@@ -1427,6 +1511,8 @@ h3 {
     kissFloat linear forwards;
 
   opacity: 0.85;
+
+  user-select: none;
 }
 
 
@@ -1460,7 +1546,8 @@ h3 {
 
 
 /* =========================================================
-   20. RESPONSIVE — TABLETS
+   20. TABLET
+   700px AND BELOW
    ========================================================= */
 
 @media (max-width: 700px) {
@@ -1495,6 +1582,11 @@ h3 {
   }
 
 
+  .certificate {
+    padding: 8px;
+  }
+
+
   .certificate-border {
     padding: 45px 25px;
 
@@ -1512,47 +1604,114 @@ h3 {
 
 
 /* =========================================================
-   21. RESPONSIVE — MOBILE
+   21. MOBILE
+   480px AND BELOW
    ========================================================= */
 
 @media (max-width: 480px) {
 
+  body {
+    min-width: 0;
+
+    font-size: 15px;
+  }
+
+
   .page {
-    padding: 20px 10px;
+    min-height: 100svh;
+
+    padding: 18px 10px;
   }
 
 
   .document-card {
-    padding: 35px 18px;
+    width: 100%;
+
+    padding: 32px 17px;
 
     border-radius: 14px;
+
+    box-shadow:
+      0 12px 35px rgba(79, 14, 25, 0.11);
+  }
+
+
+  .document-card::before {
+    height: 4px;
   }
 
 
   .official-label {
-    font-size: 0.58rem;
+    font-size: 0.56rem;
 
-    letter-spacing: 2px;
+    letter-spacing: 1.8px;
+
+    line-height: 1.5;
   }
 
 
   .ornament {
-    font-size: 1.6rem;
+    margin: 11px 0;
+
+    font-size: 1.55rem;
+  }
+
+
+  h1 {
+    font-size: clamp(2.8rem, 16vw, 4rem);
   }
 
 
   h2 {
     font-size: 2rem;
+
+    line-height: 1.2;
+  }
+
+
+  h3 {
+    font-size: 1.7rem;
+  }
+
+
+  /* ---------- Page 1 ---------- */
+
+  .date-label {
+    font-size: 0.85rem;
   }
 
 
   .decision-card h2 {
-    font-size: 2rem;
+    margin-top: 16px;
+
+    font-size: 1.95rem;
+  }
+
+
+  .decision-subtitle {
+    margin-top: 15px;
+
+    font-size: 0.83rem;
+
+    line-height: 1.65;
+  }
+
+
+  .divider {
+    width: 150px;
+
+    margin-top: 22px;
+
+    gap: 10px;
   }
 
 
   .decision-buttons {
+    margin-top: 27px;
+
     flex-direction: column;
+
+    gap: 12px;
 
     width: 100%;
   }
@@ -1560,71 +1719,658 @@ h3 {
 
   .decision-buttons .btn {
     width: min(260px, 100%);
+
+    min-height: 50px;
+  }
+
+
+  .decision-warning {
+    min-height: 45px;
+
+    margin-top: 14px;
+
+    padding: 0 5px;
+
+    font-size: 0.76rem;
+  }
+
+
+  .document-number {
+    margin-top: 24px;
+
+    font-size: 0.58rem;
+  }
+
+
+  /* ---------- Page 2 ---------- */
+
+  .declaration-text {
+    margin-top: 23px;
+  }
+
+
+  .declaration-text p {
+    margin-bottom: 16px;
+
+    font-size: 0.88rem;
+
+    line-height: 1.75;
+  }
+
+
+  .declaration-final {
+    padding: 15px;
+
+    font-size: 0.88rem !important;
+  }
+
+
+  .small-note {
+    font-size: 0.73rem !important;
+
+    line-height: 1.6;
+  }
+
+
+  .continue-btn {
+    width: 100%;
+
+    margin-top: 20px;
+
+    padding-left: 15px;
+
+    padding-right: 15px;
+
+    font-size: 0.82rem;
+  }
+
+
+  /* ---------- Page 3 ---------- */
+
+  .terms-intro {
+    font-size: 0.74rem;
+
+    line-height: 1.55;
+  }
+
+
+  .terms-list {
+    margin-top: 22px;
+
+    gap: 9px;
+  }
+
+
+  .term {
+    grid-template-columns: 32px 1fr;
+
+    gap: 9px;
+
+    padding: 12px 10px;
+
+    border-radius: 10px;
+  }
+
+
+  .term-number {
+    width: 29px;
+    height: 29px;
+
+    font-size: 0.63rem;
+  }
+
+
+  .term p {
+    font-size: 0.76rem;
+
+    line-height: 1.55;
+  }
+
+
+  .term strong {
+    font-size: 0.8rem;
+  }
+
+
+  .official-notice {
+    margin-top: 20px;
+
+    padding: 13px;
+  }
+
+
+  .official-notice strong {
+    font-size: 0.68rem;
+  }
+
+
+  .official-notice p {
+    font-size: 0.7rem;
+
+    line-height: 1.55;
   }
 
 
   .terms-actions {
+    margin-top: 22px;
+
     flex-direction: column;
+
+    gap: 10px;
+
+    min-height: 105px;
   }
 
 
   .terms-actions .btn {
     width: min(250px, 100%);
+
+    min-height: 48px;
+  }
+
+
+  .terms-message {
+    font-size: 0.72rem;
+
+    line-height: 1.5;
+  }
+
+
+  /* ---------- Page 4 ---------- */
+
+  .registration-intro {
+    margin-top: 12px;
+
+    font-size: 0.8rem;
+
+    line-height: 1.65;
   }
 
 
   .verification-block {
-    padding: 20px 15px;
+    margin-top: 22px;
+
+    padding: 18px 13px;
+
+    border-radius: 12px;
+  }
+
+
+  .verification-block label,
+  .fingerprint-label {
+    margin-bottom: 12px;
+
+    font-size: 0.78rem;
+  }
+
+
+  #fullName {
+    min-height: 50px;
+
+    padding: 13px 10px;
+
+    font-size: 0.85rem;
+  }
+
+
+  .verification-message {
+    font-size: 0.7rem;
+  }
+
+
+  .fingerprint {
+    width: 115px;
+    height: 115px;
+  }
+
+
+  .fingerprint span {
+    font-size: 2.5rem;
+  }
+
+
+  .fingerprint small {
+    font-size: 0.55rem;
+  }
+
+
+  #scanText {
+    font-size: 0.67rem;
+  }
+
+
+  .finalize-btn {
+    width: 100%;
+
+    margin-top: 22px;
+
+    font-size: 0.8rem;
+  }
+
+
+  /* ---------- Page 5 Certificate ---------- */
+
+  #page-certificate {
+    padding: 12px 7px;
   }
 
 
   .certificate {
-    padding: 7px;
+    width: 100%;
+
+    padding: 6px;
+
+    border-radius: 3px;
   }
 
 
   .certificate-border {
-    padding: 40px 15px;
+    min-height: 600px;
 
-    min-height: 560px;
+    padding: 42px 13px;
+
+    border-width: 1.5px;
+  }
+
+
+  .certificate-border::before,
+  .certificate-border::after {
+    font-size: 1.7rem;
+  }
+
+
+  .certificate-border::before {
+    top: 12px;
+    left: 12px;
+  }
+
+
+  .certificate-border::after {
+    bottom: 12px;
+    right: 12px;
   }
 
 
   .certificate-small {
-    font-size: 0.52rem;
+    font-size: 0.45rem;
+
+    letter-spacing: 1.7px;
+
+    line-height: 1.5;
+  }
+
+
+  .certificate-ornament {
+    margin: 10px 0;
+
+    font-size: 1.5rem;
+  }
+
+
+  .certificate h2 {
+    font-size: 2.25rem;
+
+    line-height: 0.98;
+  }
+
+
+  .certificate-text {
+    margin-top: 13px;
+
+    font-size: 0.68rem;
+
+    line-height: 1.55;
+  }
+
+
+  .certificate h3 {
+    margin-top: 10px;
+
+    font-size: 1.35rem;
+
+    line-height: 1.2;
+  }
+
+
+  .and {
+    margin: 5px 0;
+
+    font-size: 1.1rem;
+  }
+
+
+  .registry-title {
+    margin-top: 12px;
+
+    font-size: 0.55rem;
+
+    letter-spacing: 1px;
+
+    line-height: 1.5;
+  }
+
+
+  .status {
+    margin-top: 17px;
+
+    padding: 9px 14px;
+
+    gap: 8px;
+  }
+
+
+  .status span {
+    font-size: 0.5rem;
+  }
+
+
+  .status strong {
+    font-size: 0.58rem;
+  }
+
+
+  .certificate-final {
+    margin-top: 17px;
+
+    font-size: 0.95rem;
+  }
+
+
+  .certificate-footer {
+    margin-top: 28px;
+
+    padding-top: 12px;
+
+    gap: 5px;
+
+    font-size: 0.43rem;
+
+    line-height: 1.45;
+  }
+
+
+  .certificate-footer strong {
+    font-size: 0.48rem;
+  }
+
+
+  /* ---------- Page 6 Party ---------- */
+
+  .party-page {
+    padding: 20px 12px;
+  }
+
+
+  .party-content {
+    width: 100%;
+
+    padding: 10px;
+  }
+
+
+  .party-emojis {
+    font-size: 1.35rem;
 
     letter-spacing: 2px;
   }
 
 
-  .certificate-footer {
-    gap: 8px;
-  }
-
-
-  .party-emojis {
-    font-size: 1.4rem;
-
-    letter-spacing: 3px;
-  }
-
-
   .party-content h2 {
-    font-size: 2.5rem;
+    margin-top: 20px;
+
+    font-size: 2.45rem;
+
+    line-height: 1.08;
+  }
+
+
+  .party-divider {
+    margin: 20px 0;
+
+    font-size: 1.6rem;
   }
 
 
   .married-names {
-    font-size: 1.2rem;
+    font-size: 1.15rem;
+
+    line-height: 1.65;
+  }
+
+
+  .married-text {
+    margin-top: 16px;
+
+    font-size: 0.74rem;
+  }
+
+
+  .party-content h3 {
+    margin-top: 7px;
+
+    font-size: 2.35rem;
+  }
+
+
+  .party-note {
+    margin-top: 14px;
+
+    font-size: 0.7rem;
+  }
+
+
+  .gift-reveal {
+    width: 100%;
+
+    margin-top: 30px;
+  }
+
+
+  .gift-reveal p {
+    margin-bottom: 13px;
+
+    font-size: 0.78rem;
+  }
+
+
+  .gift-reveal .btn {
+    width: min(250px, 100%);
+
+    font-size: 0.78rem;
+  }
+
+
+  /* ---------- Page 7 Gift ---------- */
+
+  .gift-page {
+    padding: 20px 10px;
+  }
+
+
+  .gift-content {
+    padding: 10px;
   }
 
 
   .gift-envelope {
-    font-size: 4rem;
+    font-size: 4.2rem;
+  }
+
+
+  .gift-label {
+    margin-top: 20px;
+
+    font-size: 0.58rem;
+
+    letter-spacing: 2px;
   }
 
 
   .kiss-message {
+    margin-top: 22px;
+
+    font-size: clamp(
+      2.7rem,
+      13vw,
+      4rem
+    );
+
+    line-height: 1.08;
+  }
+
+
+  .kiss {
+    font-size: 1.5rem;
+  }
+
+
+  /* ---------- Decorations ---------- */
+
+  .wedding-decoration {
+    font-size: 65px;
+
+    opacity: 0.7;
+  }
+
+
+  .decoration-left {
+    top: 8px;
+    left: 5px;
+  }
+
+
+  .decoration-right {
+    right: 5px;
+    bottom: 8px;
+  }
+
+}
+
+
+/* =========================================================
+   22. VERY SMALL PHONES
+   360px AND BELOW
+   ========================================================= */
+
+@media (max-width: 360px) {
+
+  .page {
+    padding: 12px 7px;
+  }
+
+
+  .document-card {
+    padding: 28px 13px;
+  }
+
+
+  .decision-card h2 {
+    font-size: 1.75rem;
+  }
+
+
+  .decision-subtitle {
+    font-size: 0.76rem;
+  }
+
+
+  .term {
+    grid-template-columns: 28px 1fr;
+
+    gap: 7px;
+
+    padding: 10px 8px;
+  }
+
+
+  .term-number {
+    width: 26px;
+    height: 26px;
+
+    font-size: 0.55rem;
+  }
+
+
+  .term p {
+    font-size: 0.7rem;
+
+    line-height: 1.5;
+  }
+
+
+  .term strong {
+    font-size: 0.74rem;
+  }
+
+
+  .certificate-border {
+    min-height: 560px;
+
+    padding-left: 10px;
+
+    padding-right: 10px;
+  }
+
+
+  .certificate h2 {
+    font-size: 2rem;
+  }
+
+
+  .certificate h3 {
+    font-size: 1.18rem;
+  }
+
+
+  .party-content h2 {
+    font-size: 2.15rem;
+  }
+
+
+  .party-content h3 {
+    font-size: 2rem;
+  }
+
+
+  .kiss-message {
+    font-size: 2.45rem;
+  }
+
+}
+
+
+/* =========================================================
+   23. LANDSCAPE MOBILE
+   ========================================================= */
+
+@media (
+  max-height: 500px
+) and (
+  orientation: landscape
+) {
+
+  .page {
+    min-height: 100svh;
+
+    padding-top: 20px;
+
+    padding-bottom: 20px;
+  }
+
+
+  .document-card {
+    padding-top: 25px;
+
+    padding-bottom: 25px;
+  }
+
+
+  .certificate-border {
+    min-height: 520px;
+  }
+
+
+  .gift-envelope {
     font-size: 3rem;
   }
 
@@ -1632,7 +2378,7 @@ h3 {
 
 
 /* =========================================================
-   22. REDUCED MOTION
+   24. REDUCED MOTION
    ========================================================= */
 
 @media (prefers-reduced-motion: reduce) {
