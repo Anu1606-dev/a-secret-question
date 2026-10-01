@@ -1,350 +1,642 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
 
-<head>
-  <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
 
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Quicksand:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
 
-  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="css/styles.css" />
 
-  <link rel="stylesheet" href="css/styles.css" />
+    <title>Registry of Important Life Decisions 💍</title>
+  </head>
 
-  <title>A Secret Question 💌</title>
-</head>
+  <body>
 
-<body>
+    <!-- Decorative wedding elements -->
+    <div class="wedding-decoration decoration-left">❀</div>
+    <div class="wedding-decoration decoration-right">❀</div>
 
-  <!-- Floating background hearts -->
-  <div class="floating-hearts" aria-hidden="true">
-    <span>♡</span>
-    <span>♡</span>
-    <span>♡</span>
-    <span>♡</span>
-    <span>♡</span>
-    <span>♡</span>
-  </div>
+    <main class="app">
 
-  <main class="app">
-
-    <!-- =========================================
-           SCREEN 1 — FAKE CHAT
+      <!-- =========================================
+           PAGE 1 — THE BIG DECISION
       ========================================== -->
 
-    <section class="screen active" id="chat-screen">
+      <section class="page active" id="page-decision">
 
-      <div class="chat-card">
+        <div class="document-card decision-card">
 
-        <div class="chat-header">
-          <div class="avatar">💗</div>
+          <p class="official-label">
+            REGISTRY OF IMPORTANT LIFE DECISIONS
+          </p>
 
-          <div>
-            <h1>Someone</h1>
-            <span class="online">
-              <span class="online-dot"></span>
-              online
-            </span>
+          <div class="ornament">❦</div>
+
+          <p class="date-label">
+            Today is
+          </p>
+
+          <h1 id="currentDate">
+            01.10.2026
+          </h1>
+
+          <div class="divider">
+            <span>◆</span>
           </div>
+
+          <h2>
+            Are you ready for the<br />
+            biggest decision of your life?
+          </h2>
+
+          <p class="decision-subtitle">
+            Please think carefully before proceeding.
+            <br />
+            This decision may be irreversible. 👀
+          </p>
+
+          <div class="decision-buttons">
+
+            <button
+              class="btn btn-primary"
+              id="obviouslyYes"
+            >
+              Obviously Yes ❤️
+            </button>
+
+            <button
+              class="btn btn-secondary"
+              id="letMeBreathe"
+            >
+              Let Me Breathe 😰
+            </button>
+
+          </div>
+
+          <p
+            class="decision-warning"
+            id="decisionWarning"
+          ></p>
+
+          <p class="document-number">
+            Document No. AS/DP/2026/∞
+          </p>
+
         </div>
 
-        <div class="chat-body">
-
-          <div class="message received">
-            Hey... are you free for 2 minutes? 👀
-          </div>
-
-          <div class="message sent hidden-message" data-delay="700">
-            Yes? Why? 😭
-          </div>
-
-          <div class="message received hidden-message" data-delay="1400">
-            I need to ask you something.
-          </div>
-
-          <div class="message sent hidden-message" data-delay="2100">
-            What? 👀
-          </div>
-
-          <div class="message received hidden-message" data-delay="2800">
-            It's... important.
-          </div>
-
-          <div class="message received hidden-message" data-delay="3500">
-            Very important. 😳
-          </div>
-
-        </div>
-
-        <button class="primary-btn chat-btn hidden-action" id="chatContinue">
-          Tell me then 👀
-        </button>
-
-      </div>
-
-    </section>
+      </section>
 
 
-    <!-- =========================================
-           SCREEN 2 — TERMS & CONDITIONS
+      <!-- =========================================
+           PAGE 2 — MARRIAGE DECLARATION
       ========================================== -->
 
-    <section class="screen" id="terms-screen">
+      <section class="page" id="page-declaration">
 
-      <div class="content-card">
+        <div class="document-card declaration-card">
 
-        <div class="emoji-title">📜</div>
+          <p class="official-label">
+            OFFICIAL DECLARATION
+          </p>
 
-        <p class="eyebrow">ONE TINY FORMALITY</p>
+          <div class="ornament">❦</div>
 
-        <h2>Before we continue...</h2>
+          <h2>
+            Marriage Declaration
+          </h2>
 
-        <p class="subtitle">
-          You must agree to the following extremely serious
-          terms and conditions.
-        </p>
+          <div class="declaration-text">
 
-        <div class="terms-box">
+            <p>
+              I, <strong>Mr. Debangan Paulchowdhury</strong>,
+              being fully aware of the consequences of my actions,
+              hereby acknowledge that I have voluntarily entered into
+              a lifetime arrangement with
+              <strong>Ms. Anushka Sarkar</strong>.
+            </p>
 
-          <label>
-            <input type="checkbox" checked disabled />
-            <span>You agree to tolerate my nonsense.</span>
-          </label>
+            <p>
+              This arrangement shall involve unlimited conversations,
+              unnecessary arguments, random teasing, food dates,
+              emotional support, occasional nonsense and a suspicious
+              amount of love.
+            </p>
 
-          <label>
-            <input type="checkbox" checked disabled />
-            <span>You agree to answer honestly.</span>
-          </label>
+            <p>
+              I understand that this agreement may result in me being
+              permanently associated with one particular girl who may
+              occasionally be dramatic, annoying, adorable and
+              absolutely convinced that she is right.
+            </p>
 
-          <label>
-            <input type="checkbox" checked disabled />
-            <span>You agree not to judge this website. 😭</span>
-          </label>
+            <p class="declaration-final">
+              However, before this arrangement can be officially
+              processed, <strong>Ms. Anushka Sarkar has a few
+              conditions.</strong>
+            </p>
 
-          <label>
-            <input type="checkbox" checked disabled />
-            <span>You agree that I'm allowed to annoy you occasionally.</span>
-          </label>
+            <p class="small-note">
+              You will have to agree to them before proceeding.
+              <br />
+              <strong>No negotiations will be entertained. 😌</strong>
+            </p>
 
-          <label>
-            <input type="checkbox" checked disabled />
-            <span>You agree to continue reading.</span>
-          </label>
+          </div>
+
+          <button
+            class="btn btn-primary continue-btn"
+            id="declarationContinue"
+          >
+            Proceed to Terms & Conditions →
+          </button>
 
         </div>
 
-        <div class="button-row">
-
-          <button class="primary-btn" id="agreeBtn">
-            I Agree ❤️
-          </button>
-
-          <button class="secondary-btn" id="disagreeBtn">
-            I Don't Agree
-          </button>
-
-        </div>
-
-        <p class="tiny-note" id="termsMessage"></p>
-
-      </div>
-
-    </section>
+      </section>
 
 
-    <!-- =========================================
-           SCREEN 3 — SECRET MISSION
+      <!-- =========================================
+           PAGE 3 — TERMS & CONDITIONS
       ========================================== -->
 
-    <section class="screen" id="mission-screen">
+      <section class="page" id="page-terms">
 
-      <div class="content-card mission-card">
+        <div class="document-card terms-card">
 
-        <div class="mission-icon">🕵️</div>
+          <p class="official-label">
+            ANNEXURE A
+          </p>
 
-        <p class="eyebrow">MISSION ACCEPTED</p>
+          <div class="ornament">❦</div>
 
-        <h2>Find the secret.</h2>
+          <h2>
+            Marriage Terms & Conditions
+          </h2>
 
-        <p class="subtitle">
-          Somewhere on this screen is a clue.
-          Choose wisely. 👀
-        </p>
+          <p class="terms-intro">
+            Applicable to:
+            <strong>
+              Ms. Anushka Sarkar & Mr. Debangan Paulchowdhury
+            </strong>
+          </p>
 
-        <div class="objects">
+          <div class="terms-list">
 
-          <button class="secret-object" data-object="lock">
-            <span>🔐</span>
-            <small>LOCK</small>
-          </button>
+            <article class="term">
+              <span class="term-number">01</span>
+              <p>
+                <strong>The Food Clause 🍚</strong><br />
+                Mr. Debangan agrees that whenever Ms. Anushka says
+                <em>“I'm not hungry”</em>, this statement may be
+                temporary and shall not prevent her from eating from
+                his plate.
+              </p>
+            </article>
 
-          <button class="secret-object" data-object="flower">
-            <span>🌷</span>
-            <small>FLOWER</small>
-          </button>
+            <article class="term">
+              <span class="term-number">02</span>
+              <p>
+                <strong>The Reply Clause 📱</strong><br />
+                All messages from Ms. Anushka shall be acknowledged
+                within a reasonable husband-approved time limit.
+                <em>“Sorry, I was busy”</em> may be accepted only
+                after appropriate investigation. 👀
+              </p>
+            </article>
 
-          <button class="secret-object" data-object="letter">
-            <span>💌</span>
-            <small>LETTER</small>
-          </button>
+            <article class="term">
+              <span class="term-number">03</span>
+              <p>
+                <strong>The Argument Clause 😤</strong><br />
+                In the event of disagreement, Mr. Debangan is advised
+                to remain calm, listen carefully and remember that
+                <em>“Okay Anu, you're right.”</em> may significantly
+                reduce the duration of the dispute.
+              </p>
+            </article>
+
+            <article class="term">
+              <span class="term-number">04</span>
+              <p>
+                <strong>The Hug Clause 🫂</strong><br />
+                Ms. Anushka shall have unlimited access to hugs,
+                cuddles and other forms of husband-related affection,
+                with no daily quota and no cancellation policy.
+              </p>
+            </article>
+
+            <article class="term">
+              <span class="term-number">05</span>
+              <p>
+                <strong>The Photography Clause 📸</strong><br />
+                If Ms. Anushka says <em>“Just one picture.”</em>,
+                Mr. Debangan shall understand that the actual number
+                may range anywhere between 1 and 147.
+              </p>
+            </article>
+
+            <article class="term">
+              <span class="term-number">06</span>
+              <p>
+                <strong>The Spontaneous Plan Clause 🛍️</strong><br />
+                Mr. Debangan agrees to occasionally participate in
+                plans beginning with <em>“Let's just go somewhere...”</em>
+                without demanding a complete itinerary.
+              </p>
+            </article>
+
+            <article class="term">
+              <span class="term-number">07</span>
+              <p>
+                <strong>The Memory Clause 🧠</strong><br />
+                Mr. Debangan shall make reasonable efforts to remember
+                important dates, conversations and tiny details
+                previously mentioned by Ms. Anushka.
+              </p>
+            </article>
+
+            <article class="term">
+              <span class="term-number">08</span>
+              <p>
+                <strong>The Emergency Support Clause 🍫</strong><br />
+                In situations involving sadness, stress, overthinking
+                or unexplained irritation, appropriate levels of
+                attention, reassurance, food and hugs shall be provided.
+              </p>
+            </article>
+
+            <article class="term">
+              <span class="term-number">09</span>
+              <p>
+                <strong>The Lifetime Clause ❤️</strong><br />
+                Regardless of arguments, bad days, distance or general
+                chaos, both parties agree to choose each other,
+                communicate honestly and take care of each other.
+              </p>
+            </article>
+
+            <article class="term">
+              <span class="term-number">10</span>
+              <p>
+                <strong>The Final Clause 💍</strong><br />
+                Mr. Debangan Paulchowdhury voluntarily accepts the
+                permanent position of
+                <strong>Anushka's Husband</strong>.
+                The position includes unlimited love, occasional
+                harassment, random surprises and lifelong companionship.
+                <strong>No resignation option.</strong>
+              </p>
+            </article>
+
+          </div>
+
+          <div class="official-notice">
+
+            <strong>OFFICIAL NOTICE</strong>
+
+            <p>
+              Failure to comply may result in extra hugs,
+              unnecessary teasing, dramatic complaints, stolen food
+              and being reminded that <em>“I told you so.”</em> 😂
+            </p>
+
+          </div>
+
+          <div class="terms-actions">
+
+            <button
+              class="btn btn-primary"
+              id="agreeTerms"
+            >
+              I AGREE ❤️
+            </button>
+
+            <button
+              class="btn btn-secondary"
+              id="disagreeTerms"
+            >
+              I DISAGREE
+            </button>
+
+          </div>
+
+          <p
+            class="terms-message"
+            id="termsMessage"
+          ></p>
 
         </div>
 
-        <div class="mission-message" id="missionMessage">
-          Choose an object...
-        </div>
-
-        <button class="primary-btn hidden" id="missionContinue">
-          Open the clue 💌
-        </button>
-
-      </div>
-
-    </section>
+      </section>
 
 
-    <!-- =========================================
-           SCREEN 4 — FINAL CHAT
+      <!-- =========================================
+           PAGE 4 — REGISTRATION
       ========================================== -->
 
-    <section class="screen" id="final-chat-screen">
+      <section class="page" id="page-registration">
 
-      <div class="chat-card final-chat">
+        <div class="document-card registration-card">
 
-        <div class="chat-header">
+          <p class="official-label">
+            REGISTRATION OFFICE
+          </p>
 
-          <div class="avatar">💗</div>
+          <div class="ornament">❦</div>
 
-          <div>
-            <h1>Someone</h1>
-            <span class="online">
-              <span class="online-dot"></span>
-              still here
-            </span>
+          <h2>
+            Identity Verification
+          </h2>
+
+          <p class="registration-intro">
+            Before this marriage can be processed,
+            the groom must verify his identity.
+          </p>
+
+
+          <!-- NAME -->
+
+          <div class="verification-block">
+
+            <label for="fullName">
+              ✍️ Sign here, Mr. Debangan
+            </label>
+
+            <input
+              type="text"
+              id="fullName"
+              placeholder="Enter your full name"
+              autocomplete="off"
+            />
+
+            <p
+              class="verification-message"
+              id="nameMessage"
+            ></p>
+
           </div>
 
-        </div>
 
-        <div class="chat-body final-body">
+          <!-- FINGERPRINT -->
 
-          <div class="message received">
-            Okay...
+          <div class="verification-block">
+
+            <p class="fingerprint-label">
+              🖐️ And your fingerprint here...
+            </p>
+
+            <button
+              class="fingerprint"
+              id="fingerprintBtn"
+              aria-label="Fingerprint verification"
+            >
+              <span>🖐️</span>
+              <small>CLICK TO SCAN</small>
+            </button>
+
+            <div
+              class="scan-progress hidden"
+              id="scanProgress"
+            >
+              <div class="progress-bar">
+                <div class="progress-fill"></div>
+              </div>
+
+              <p id="scanText">
+                Scanning...
+              </p>
+            </div>
+
+            <p
+              class="verification-message"
+              id="fingerprintMessage"
+            ></p>
+
           </div>
 
-          <div class="message received">
-            You made it. 😌
-          </div>
 
-          <div class="message sent">
-            Made it where? 😭
-          </div>
-
-          <div class="message received">
-            To the actual question.
-          </div>
-
-          <div class="message received">
-            And no, you can't escape this time. 👀
-          </div>
-
-          <div class="typing" id="typing">
-            <span></span>
-            <span></span>
-            <span></span>
-          </div>
-
-        </div>
-
-        <button class="primary-btn hidden" id="realQuestionBtn">
-          What is it? 👀
-        </button>
-
-      </div>
-
-    </section>
-
-
-    <!-- =========================================
-           SCREEN 5 — FINAL QUESTION
-      ========================================== -->
-
-    <section class="screen" id="question-screen">
-
-      <div class="final-card">
-
-        <div class="big-heart">💗</div>
-
-        <p class="eyebrow">THE ACTUAL QUESTION</p>
-
-        <h2>
-          Will you keep<br />
-          choosing me?
-        </h2>
-
-        <p class="final-subtitle">
-          Even when I annoy you.<br />
-          Even when I am being dramatic. 😭
-        </p>
-
-        <div class="final-buttons">
-
-          <button class="yes-btn" id="yesBtn">
-            YES ❤️
+          <button
+            class="btn btn-primary finalize-btn hidden"
+            id="finalizeBtn"
+          >
+            FINALIZE MARRIAGE 💍
           </button>
 
-          <button class="obviously-btn" id="obviouslyBtn">
-            Obviously 🙄
-          </button>
-
         </div>
 
-      </div>
-
-    </section>
+      </section>
 
 
-    <!-- =========================================
-           SCREEN 6 — RESULT
+      <!-- =========================================
+           PAGE 5 — MARRIAGE CERTIFICATE
       ========================================== -->
 
-    <section class="screen" id="result-screen">
+      <section class="page" id="page-certificate">
 
-      <div class="result-card">
+        <div class="certificate">
 
-        <div class="celebration">🥹💗</div>
+          <div class="certificate-border">
 
-        <video class="gif-result" src="cute-love-gif.mp4" autoplay loop muted playsinline></video>
+            <p class="certificate-small">
+              THE DEPARTMENT OF ANUSHKA'S
+            </p>
 
-        <p class="eyebrow">MISSION COMPLETED</p>
+            <p class="certificate-small">
+              VERY IMPORTANT DECISIONS
+            </p>
 
-        <h2>I knew it. 😌❤️</h2>
+            <div class="certificate-ornament">
+              ❦
+            </div>
 
-        <p class="result-text">
-          You are officially stuck with me now.
-        </p>
+            <h2>
+              CERTIFICATE<br />
+              OF MARRIAGE
+            </h2>
 
-        <p class="small-result">
-          No refunds. No cancellations. No escape. 😂
-        </p>
+            <p class="certificate-text">
+              This is to officially declare that
+            </p>
 
-        <div class="heart-line">
-          ♡ &nbsp; ♡ &nbsp; ♡
+            <h3>
+              Ms. Anushka Sarkar
+            </h3>
+
+            <p class="and">
+              &
+            </p>
+
+            <h3>
+              Mr. Debangan Paulchowdhury
+            </h3>
+
+            <p class="certificate-text">
+              have successfully completed the highly legitimate and
+              absolutely serious
+            </p>
+
+            <p class="registry-title">
+              INTERNET REGISTRY MARRIAGE PROCEDURE™
+            </p>
+
+            <div class="status">
+              <span>STATUS</span>
+              <strong>MARRIED ❤️</strong>
+            </div>
+
+            <p class="certificate-final">
+              Congratulations, Mr. Husband. 😌
+            </p>
+
+            <div class="certificate-footer">
+
+              <span>
+                Bride<br />
+                <strong>Anushka Sarkar</strong>
+              </span>
+
+              <span>
+                Official Seal<br />
+                💍
+              </span>
+
+              <span>
+                Groom<br />
+                <strong>Debangan Paulchowdhury</strong>
+              </span>
+
+            </div>
+
+          </div>
+
         </div>
 
-      </div>
-
-    </section>
-
-  </main>
+      </section>
 
 
-  <!-- Celebration hearts -->
-  <div class="celebration-hearts" id="celebrationHearts"></div>
+      <!-- =========================================
+           PAGE 6 — PARTY
+      ========================================== -->
 
-  <script src="js/script.js"></script>
+      <section class="page party-page" id="page-party">
 
-</body>
+        <div
+          class="confetti-container"
+          id="confettiContainer"
+        ></div>
 
+        <div class="party-content">
+
+          <div class="party-emojis">
+            🎉 💍 🎊 ❤️ 🎈
+          </div>
+
+          <p class="official-label">
+            REGISTRATION SUCCESSFUL
+          </p>
+
+          <h2>
+            You are now my<br />
+            eligible husband. ❤️
+          </h2>
+
+          <div class="party-divider">
+            ❦
+          </div>
+
+          <p class="married-names">
+            Ms. Anushka Sarkar
+            <br />
+            &
+            <br />
+            Mr. Debangan Paulchowdhury
+          </p>
+
+          <p class="married-text">
+            are officially, unnecessarily,
+            ridiculously and completely
+          </p>
+
+          <h3>
+            MARRIED. 💍
+          </h3>
+
+          <p class="party-note">
+            Please accept your new marital responsibilities
+            with grace. 😂
+          </p>
+
+          <div
+            class="gift-reveal hidden"
+            id="giftReveal"
+          >
+
+            <p>
+              🎁 Your gift from your beloved wife Anushka...
+            </p>
+
+            <button
+              class="btn btn-primary"
+              id="openGift"
+            >
+              OPEN YOUR GIFT 💌
+            </button>
+
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- =========================================
+           PAGE 7 — THE GIFT
+      ========================================== -->
+
+      <section class="page gift-page" id="page-gift">
+
+        <div
+          class="kiss-container"
+          id="kissContainer"
+        ></div>
+
+        <div class="gift-content">
+
+          <div class="gift-envelope">
+            💌
+          </div>
+
+          <p class="gift-label">
+            A VERY IMPORTANT MESSAGE
+          </p>
+
+          <h2
+            class="kiss-message hidden"
+            id="kissMessage"
+          >
+            Now go...
+            <br />
+            <span>Kiss your Anu. 💋</span>
+          </h2>
+
+        </div>
+
+      </section>
+
+    </main>
+
+    <script src="js/script.js"></script>
+
+  </body>
 </html>
