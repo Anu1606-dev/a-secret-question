@@ -1,59 +1,350 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap"
-      rel="stylesheet"
-    />
-    <!-- CSS Styles Sheet -->
-    <link rel="stylesheet" href="css/styles.css" />
-    <title>Do You Love Me?</title>
-  </head>
-  <body>
-    <div class="question-container container">
-      <div
-        class="tenor-gif-embed"
-        data-postid="25789758"
-        data-share-method="host"
-        data-width="100%"
-      >
-        <a href="https://tenor.com/view/tkthao219-bubududu-gif-25789758"
-          >Tkthao219 Bubududu Sticker</a
-        >from
-        <a href="https://tenor.com/search/tkthao219-stickers"
-          >Tkthao219 Stickers</a
-        >
-      </div>
-      <script
-        type="text/javascript"
-        async
-        src="https://tenor.com/embed.js"
-      ></script>
 
-      <h2 class="question">Tumi amai valobasoto?👉👈</h2>
-      <div class="button-container">
-        <button class="yes-btn btn js-yes-btn">Yes</button>
-        <button class="no-btn btn js-no-btn">No</button>
-      </div>
-    </div>
-    <div class="result-container container">
-      <video class="gif-result" src="cute-love-gif.mp4" autoplay loop></video>
-      <h2>I knew it😍!</h2>
-    </div>
+<head>
+  <meta charset="UTF-8" />
 
-    <div class="cssload-main">
-      <div class="cssload-heart">
-        <span class="cssload-heartL"></span>
-        <span class="cssload-heartR"></span>
-        <span class="cssload-square"></span>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="css/styles.css" />
+
+  <title>A Secret Question 💌</title>
+</head>
+
+<body>
+
+  <!-- Floating background hearts -->
+  <div class="floating-hearts" aria-hidden="true">
+    <span>♡</span>
+    <span>♡</span>
+    <span>♡</span>
+    <span>♡</span>
+    <span>♡</span>
+    <span>♡</span>
+  </div>
+
+  <main class="app">
+
+    <!-- =========================================
+           SCREEN 1 — FAKE CHAT
+      ========================================== -->
+
+    <section class="screen active" id="chat-screen">
+
+      <div class="chat-card">
+
+        <div class="chat-header">
+          <div class="avatar">💗</div>
+
+          <div>
+            <h1>Someone</h1>
+            <span class="online">
+              <span class="online-dot"></span>
+              online
+            </span>
+          </div>
+        </div>
+
+        <div class="chat-body">
+
+          <div class="message received">
+            Hey... are you free for 2 minutes? 👀
+          </div>
+
+          <div class="message sent hidden-message" data-delay="700">
+            Yes? Why? 😭
+          </div>
+
+          <div class="message received hidden-message" data-delay="1400">
+            I need to ask you something.
+          </div>
+
+          <div class="message sent hidden-message" data-delay="2100">
+            What? 👀
+          </div>
+
+          <div class="message received hidden-message" data-delay="2800">
+            It's... important.
+          </div>
+
+          <div class="message received hidden-message" data-delay="3500">
+            Very important. 😳
+          </div>
+
+        </div>
+
+        <button class="primary-btn chat-btn hidden-action" id="chatContinue">
+          Tell me then 👀
+        </button>
+
       </div>
-      <div class="cssload-shadow"></div>
-    </div>
-    <script src="js/script.js"></script>
-  </body>
+
+    </section>
+
+
+    <!-- =========================================
+           SCREEN 2 — TERMS & CONDITIONS
+      ========================================== -->
+
+    <section class="screen" id="terms-screen">
+
+      <div class="content-card">
+
+        <div class="emoji-title">📜</div>
+
+        <p class="eyebrow">ONE TINY FORMALITY</p>
+
+        <h2>Before we continue...</h2>
+
+        <p class="subtitle">
+          You must agree to the following extremely serious
+          terms and conditions.
+        </p>
+
+        <div class="terms-box">
+
+          <label>
+            <input type="checkbox" checked disabled />
+            <span>You agree to tolerate my nonsense.</span>
+          </label>
+
+          <label>
+            <input type="checkbox" checked disabled />
+            <span>You agree to answer honestly.</span>
+          </label>
+
+          <label>
+            <input type="checkbox" checked disabled />
+            <span>You agree not to judge this website. 😭</span>
+          </label>
+
+          <label>
+            <input type="checkbox" checked disabled />
+            <span>You agree that I'm allowed to annoy you occasionally.</span>
+          </label>
+
+          <label>
+            <input type="checkbox" checked disabled />
+            <span>You agree to continue reading.</span>
+          </label>
+
+        </div>
+
+        <div class="button-row">
+
+          <button class="primary-btn" id="agreeBtn">
+            I Agree ❤️
+          </button>
+
+          <button class="secondary-btn" id="disagreeBtn">
+            I Don't Agree
+          </button>
+
+        </div>
+
+        <p class="tiny-note" id="termsMessage"></p>
+
+      </div>
+
+    </section>
+
+
+    <!-- =========================================
+           SCREEN 3 — SECRET MISSION
+      ========================================== -->
+
+    <section class="screen" id="mission-screen">
+
+      <div class="content-card mission-card">
+
+        <div class="mission-icon">🕵️</div>
+
+        <p class="eyebrow">MISSION ACCEPTED</p>
+
+        <h2>Find the secret.</h2>
+
+        <p class="subtitle">
+          Somewhere on this screen is a clue.
+          Choose wisely. 👀
+        </p>
+
+        <div class="objects">
+
+          <button class="secret-object" data-object="lock">
+            <span>🔐</span>
+            <small>LOCK</small>
+          </button>
+
+          <button class="secret-object" data-object="flower">
+            <span>🌷</span>
+            <small>FLOWER</small>
+          </button>
+
+          <button class="secret-object" data-object="letter">
+            <span>💌</span>
+            <small>LETTER</small>
+          </button>
+
+        </div>
+
+        <div class="mission-message" id="missionMessage">
+          Choose an object...
+        </div>
+
+        <button class="primary-btn hidden" id="missionContinue">
+          Open the clue 💌
+        </button>
+
+      </div>
+
+    </section>
+
+
+    <!-- =========================================
+           SCREEN 4 — FINAL CHAT
+      ========================================== -->
+
+    <section class="screen" id="final-chat-screen">
+
+      <div class="chat-card final-chat">
+
+        <div class="chat-header">
+
+          <div class="avatar">💗</div>
+
+          <div>
+            <h1>Someone</h1>
+            <span class="online">
+              <span class="online-dot"></span>
+              still here
+            </span>
+          </div>
+
+        </div>
+
+        <div class="chat-body final-body">
+
+          <div class="message received">
+            Okay...
+          </div>
+
+          <div class="message received">
+            You made it. 😌
+          </div>
+
+          <div class="message sent">
+            Made it where? 😭
+          </div>
+
+          <div class="message received">
+            To the actual question.
+          </div>
+
+          <div class="message received">
+            And no, you can't escape this time. 👀
+          </div>
+
+          <div class="typing" id="typing">
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+
+        </div>
+
+        <button class="primary-btn hidden" id="realQuestionBtn">
+          What is it? 👀
+        </button>
+
+      </div>
+
+    </section>
+
+
+    <!-- =========================================
+           SCREEN 5 — FINAL QUESTION
+      ========================================== -->
+
+    <section class="screen" id="question-screen">
+
+      <div class="final-card">
+
+        <div class="big-heart">💗</div>
+
+        <p class="eyebrow">THE ACTUAL QUESTION</p>
+
+        <h2>
+          Will you keep<br />
+          choosing me?
+        </h2>
+
+        <p class="final-subtitle">
+          Even when I annoy you.<br />
+          Even when I am being dramatic. 😭
+        </p>
+
+        <div class="final-buttons">
+
+          <button class="yes-btn" id="yesBtn">
+            YES ❤️
+          </button>
+
+          <button class="obviously-btn" id="obviouslyBtn">
+            Obviously 🙄
+          </button>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =========================================
+           SCREEN 6 — RESULT
+      ========================================== -->
+
+    <section class="screen" id="result-screen">
+
+      <div class="result-card">
+
+        <div class="celebration">🥹💗</div>
+
+        <video class="gif-result" src="cute-love-gif.mp4" autoplay loop muted playsinline></video>
+
+        <p class="eyebrow">MISSION COMPLETED</p>
+
+        <h2>I knew it. 😌❤️</h2>
+
+        <p class="result-text">
+          You are officially stuck with me now.
+        </p>
+
+        <p class="small-result">
+          No refunds. No cancellations. No escape. 😂
+        </p>
+
+        <div class="heart-line">
+          ♡ &nbsp; ♡ &nbsp; ♡
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+
+  <!-- Celebration hearts -->
+  <div class="celebration-hearts" id="celebrationHearts"></div>
+
+  <script src="js/script.js"></script>
+
+</body>
+
 </html>
