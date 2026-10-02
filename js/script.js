@@ -1,182 +1,112 @@
+/* =========================================================
+   A SECRET QUESTION — Interaction Logic
+   ========================================================= */
+
 document.addEventListener("DOMContentLoaded", () => {
 
-  /* =========================================================
-     CONFIG
-  ========================================================= */
+  const pages = [
+    "decision",
+    "declaration",
+    "terms",
+    "registration",
+    "ring",
+    "certificate",
+    "party",
+    "gift",
+  ];
 
-  const CORRECT_NAME = "debanganpaulchowdhury";
-
-
-  /* =========================================================
-     PAGES
-  ========================================================= */
-
-  const pages = {
-    decision: document.getElementById("page-decision"),
-    declaration: document.getElementById("page-declaration"),
-    terms: document.getElementById("page-terms"),
-    registration: document.getElementById("page-registration"),
-
-    /* NEW PAGE */
-    ring: document.getElementById("page-ring"),
-
-    certificate: document.getElementById("page-certificate"),
-    party: document.getElementById("page-party"),
-    gift: document.getElementById("page-gift"),
-  };
+  const $ = (id) => document.getElementById(id);
 
 
   /* =========================================================
      ELEMENTS
-  ========================================================= */
+     ========================================================= */
 
-  const currentDate =
-    document.getElementById("currentDate");
+  const currentDate = $("currentDate");
+  const currentTime = $("currentTime");
 
-  const currentTime =
-    document.getElementById("currentTime");
+  const decisionWarning = $("decisionWarning");
+  const letMeBreathe = $("letMeBreathe");
+  const obviouslyYes = $("obviouslyYes");
 
-  const obviouslyYes =
-    document.getElementById("obviouslyYes");
+  const disagreeTerms = $("disagreeTerms");
+  const agreeTerms = $("agreeTerms");
 
-  const letMeBreathe =
-    document.getElementById("letMeBreathe");
+  const fullName = $("fullName");
+  const nameMessage = $("nameMessage");
 
-  const decisionWarning =
-    document.getElementById("decisionWarning");
+  const fingerprintBtn = $("fingerprintBtn");
+  const scanProgress = $("scanProgress");
+  const progressFill = $("progressFill");
+  const scanText = $("scanText");
+  const fingerprintMessage = $("fingerprintMessage");
 
-  const declarationContinue =
-    document.getElementById("declarationContinue");
+  const finalizeBtn = $("finalizeBtn");
 
-  const agreeTerms =
-    document.getElementById("agreeTerms");
+  const ringReveal = $("ringReveal");
+  const certificateDate = $("certificateDate");
 
-  const disagreeTerms =
-    document.getElementById("disagreeTerms");
+  const giftReveal = $("giftReveal");
+  const openGift = $("openGift");
 
-  const termsMessage =
-    document.getElementById("termsMessage");
-
-  const fullName =
-    document.getElementById("fullName");
-
-  const nameMessage =
-    document.getElementById("nameMessage");
-
-  const fingerprintBtn =
-    document.getElementById("fingerprintBtn");
-
-  const scanProgress =
-    document.getElementById("scanProgress");
-
-  const scanText =
-    document.getElementById("scanText");
-
-  const fingerprintMessage =
-    document.getElementById("fingerprintMessage");
-
-  const finalizeBtn =
-    document.getElementById("finalizeBtn");
-
-
-  /* NEW RING PAGE ELEMENTS */
-
-  const ringReveal =
-    document.getElementById("ringReveal");
-
-  const ringLoading =
-    document.getElementById("ringLoading");
-
-
-  /* CERTIFICATE */
-
-  const certificateTime =
-    document.getElementById("certificateTime");
-
-  const certificateContinue =
-    document.getElementById("certificateContinue");
-
-
-  /* PARTY */
-
-  const giftReveal =
-    document.getElementById("giftReveal");
-
-  const openGift =
-    document.getElementById("openGift");
-
-
-  /* GIFT */
-
-  const kissContainer =
-    document.getElementById("kissContainer");
-
-  const kissMessage =
-    document.getElementById("kissMessage");
-
-
-  /* CONFETTI */
-
-  const confettiContainer =
-    document.getElementById("confettiContainer");
+  const kissContainer = $("kissContainer");
+  const kissMessage = $("kissMessage");
 
 
   /* =========================================================
      STATE
-  ========================================================= */
+     ========================================================= */
 
-  let currentPage = "decision";
+  let nameValid = false;
+  let fingerprintValid = false;
+  let scanning = false;
 
-  let nameVerified = false;
+  let giftTimer = null;
 
-  let fingerprintVerified = false;
+  let ringRevealTimer = null;
+  let ringCertificateTimer = null;
 
-  let fingerprintScanning = false;
 
-  let partyStarted = false;
+  /*
+     IMPORTANT:
 
-  let giftOpened = false;
+     We compare ONLY alphabetic characters.
 
-  let ringSequenceStarted = false;
+     Therefore all of these work:
+
+     Debangan Paulchowdhury
+     DEBANGAN PAUL CHOWDHURY
+     debangan paul chowdhury
+     DeBaNgAn PaUl ChOuDhUrY
+     Debangan     Paul     Chowdhury
+     DEBANGANPAULCHOWDHURY
+
+     Punctuation/spaces are also ignored.
+
+     Actual spelling mistakes will NOT be accepted.
+  */
+
+  const REQUIRED_NAME = "debanganpaulchowdhury";
 
 
   /* =========================================================
      PAGE NAVIGATION
-  ========================================================= */
+     ========================================================= */
 
-  function showPage(pageName) {
+  function showPage(name) {
 
-    Object.values(pages).forEach((page) => {
+    pages.forEach((page) => {
 
-      if (!page) return;
+      const section = $(`page-${page}`);
 
-      page.classList.remove("active");
+      if (!section) return;
 
-      page.setAttribute(
-        "aria-hidden",
-        "true"
+      section.classList.toggle(
+        "active",
+        page === name
       );
+
     });
-
-
-    const targetPage =
-      pages[pageName];
-
-    if (!targetPage) {
-      return;
-    }
-
-
-    targetPage.classList.add("active");
-
-    targetPage.setAttribute(
-      "aria-hidden",
-      "false"
-    );
-
-
-    currentPage = pageName;
-
 
     window.scrollTo({
       top: 0,
@@ -187,57 +117,36 @@ document.addEventListener("DOMContentLoaded", () => {
 
   /* =========================================================
      DATE + TIME
-  ========================================================= */
+     ========================================================= */
 
   function updateDateTime() {
 
     const now = new Date();
 
+    const dd = String(
+      now.getDate()
+    ).padStart(2, "0");
 
-    if (currentDate) {
+    const mm = String(
+      now.getMonth() + 1
+    ).padStart(2, "0");
 
-      const day =
-        String(now.getDate()).padStart(2, "0");
+    const yyyy = now.getFullYear();
 
-      const month =
-        String(now.getMonth() + 1).padStart(
-          2,
-          "0"
-        );
-
-      const year =
-        now.getFullYear();
+    currentDate.textContent =
+      `${dd}.${mm}.${yyyy}`;
 
 
-      currentDate.textContent =
-        `${day}.${month}.${year}`;
-    }
-
-
-    if (currentTime) {
-
-      const hours =
-        String(now.getHours()).padStart(
-          2,
-          "0"
-        );
-
-      const minutes =
-        String(now.getMinutes()).padStart(
-          2,
-          "0"
-        );
-
-      const seconds =
-        String(now.getSeconds()).padStart(
-          2,
-          "0"
-        );
-
-
-      currentTime.textContent =
-        `${hours}:${minutes}:${seconds}`;
-    }
+    currentTime.textContent =
+      now.toLocaleTimeString(
+        undefined,
+        {
+          hour: "2-digit",
+          minute: "2-digit",
+          second: "2-digit",
+          hour12: true,
+        }
+      );
   }
 
 
@@ -250,968 +159,681 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
   /* =========================================================
-     PAGE 1 — YES
-  ========================================================= */
+     MOVING BUTTON
+     ========================================================= */
 
-  if (obviouslyYes) {
+  function moveButton(
+    button,
+    messageElement,
+    messages
+  ) {
 
-    obviouslyYes.addEventListener(
-      "click",
-      () => {
+    if (
+      !button ||
+      button.dataset.moving === "true"
+    ) {
+      return;
+    }
 
-        showPage("declaration");
+    button.dataset.moving = "true";
 
-      }
-    );
+    button.style.position = "fixed";
+    button.style.zIndex = "9999";
+
+
+    const move = () => {
+
+      const rect =
+        button.getBoundingClientRect();
+
+      const margin = 12;
+
+      const maxX =
+        Math.max(
+          margin,
+          window.innerWidth -
+            rect.width -
+            margin
+        );
+
+      const maxY =
+        Math.max(
+          margin,
+          window.innerHeight -
+            rect.height -
+            margin
+        );
+
+      const x =
+        margin +
+        Math.random() *
+          (maxX - margin);
+
+      const y =
+        margin +
+        Math.random() *
+          (maxY - margin);
+
+      button.style.left =
+        `${x}px`;
+
+      button.style.top =
+        `${y}px`;
+    };
+
+
+    move();
+
+
+    const message =
+      messages[
+        Math.floor(
+          Math.random() *
+            messages.length
+        )
+      ];
+
+
+    messageElement.textContent =
+      message;
   }
 
 
   /* =========================================================
-     PAGE 1 — MOVING "LET ME BREATHE"
-  ========================================================= */
+     PAGE 1
+     ========================================================= */
 
-  function moveBreathingButton() {
+  obviouslyYes.addEventListener(
+    "click",
+    () => {
 
-    if (!letMeBreathe) {
-      return;
+      showPage(
+        "declaration"
+      );
+
     }
+  );
 
 
-    const buttonRect =
-      letMeBreathe.getBoundingClientRect();
+  const decisionMessages = [
+    "NO!! You should have thought about this earlier! 😭",
+    "WE WILL DO IT RIGHT NOW!! 💍",
+    "There is no escape route. 🙂",
+    "Nice try. Now press the correct button. ❤️",
+  ];
 
 
-    const padding = 20;
+  [
+    "mouseenter",
+    "touchstart",
+    "click",
+  ].forEach(
+    (eventName) => {
 
+      letMeBreathe.addEventListener(
+        eventName,
+        (event) => {
 
-    const maxX =
-      Math.max(
-        padding,
-        window.innerWidth -
-          buttonRect.width -
-          padding
+          if (
+            eventName === "click"
+          ) {
+            event.preventDefault();
+          }
+
+          moveButton(
+            letMeBreathe,
+            decisionWarning,
+            decisionMessages
+          );
+
+        },
+        {
+          passive:
+            eventName !== "click",
+        }
       );
 
-
-    const maxY =
-      Math.max(
-        padding,
-        window.innerHeight -
-          buttonRect.height -
-          padding
-      );
-
-
-    const randomX =
-      Math.floor(
-        Math.random() * maxX
-      );
-
-
-    const randomY =
-      Math.floor(
-        Math.random() * maxY
-      );
-
-
-    letMeBreathe.style.position =
-      "fixed";
-
-    letMeBreathe.style.left =
-      `${randomX}px`;
-
-    letMeBreathe.style.top =
-      `${randomY}px`;
-
-    letMeBreathe.style.zIndex =
-      "9999";
-
-
-    if (decisionWarning) {
-
-      const messages = [
-        "NO!! You should have thought about it earlier! 😭",
-        "WE WILL DO IT RIGHT NOW!! 💍",
-        "There is no escape. 😌",
-        "Nice try. 😂",
-        "Absolutely not.",
-        "Too late now. ❤️",
-        "The registry office has decided. 😭",
-        "Sir, please cooperate. 💍",
-        "You cannot escape your destiny. 😂",
-      ];
-
-
-      decisionWarning.textContent =
-        messages[
-          Math.floor(
-            Math.random() *
-              messages.length
-          )
-        ];
     }
-  }
-
-
-  if (letMeBreathe) {
-
-    letMeBreathe.addEventListener(
-      "mouseenter",
-      moveBreathingButton
-    );
-
-
-    letMeBreathe.addEventListener(
-      "touchstart",
-      (event) => {
-
-        event.preventDefault();
-
-        moveBreathingButton();
-
-      },
-      {
-        passive: false,
-      }
-    );
-
-
-    letMeBreathe.addEventListener(
-      "click",
-      (event) => {
-
-        event.preventDefault();
-
-        moveBreathingButton();
-
-      }
-    );
-  }
+  );
 
 
   /* =========================================================
      PAGE 2
-  ========================================================= */
+     ========================================================= */
 
-  if (declarationContinue) {
+  $(
+    "declarationContinue"
+  ).addEventListener(
+    "click",
+    () => {
 
-    declarationContinue.addEventListener(
-      "click",
-      () => {
+      showPage("terms");
 
-        showPage("terms");
-
-      }
-    );
-  }
+    }
+  );
 
 
   /* =========================================================
-     PAGE 3 — AGREE
-  ========================================================= */
+     PAGE 3
+     ========================================================= */
 
-  if (agreeTerms) {
+  const termsMessages = [
+    "I DISAGREE is currently unavailable. 😌",
+    "That button has resigned from its position.",
+    "Please select the only legally acceptable option. ❤️",
+    "Nice attempt. Try agreeing. 💍",
+  ];
 
-    agreeTerms.addEventListener(
-      "click",
-      () => {
 
-        if (termsMessage) {
+  [
+    "mouseenter",
+    "touchstart",
+    "click",
+  ].forEach(
+    (eventName) => {
 
-          termsMessage.textContent =
-            "Excellent. Your decision has been officially recorded. 😌❤️";
+      disagreeTerms.addEventListener(
+        eventName,
+        (event) => {
+
+          if (
+            eventName === "click"
+          ) {
+            event.preventDefault();
+          }
+
+          moveButton(
+            disagreeTerms,
+            $("termsMessage"),
+            termsMessages
+          );
+
+        },
+        {
+          passive:
+            eventName !== "click",
         }
+      );
+
+    }
+  );
 
 
-        agreeTerms.disabled = true;
+  agreeTerms.addEventListener(
+    "click",
+    () => {
 
+      showPage(
+        "registration"
+      );
 
-        setTimeout(() => {
-
-          showPage("registration");
-
-        }, 900);
-      }
-    );
-  }
+    }
+  );
 
 
   /* =========================================================
-     PAGE 3 — DISAGREE BUTTON
-  ========================================================= */
-
-  function moveDisagreeButton() {
-
-    if (!disagreeTerms) {
-      return;
-    }
-
-
-    const buttonRect =
-      disagreeTerms.getBoundingClientRect();
-
-
-    const padding = 15;
-
-
-    const maxX =
-      Math.max(
-        padding,
-        window.innerWidth -
-          buttonRect.width -
-          padding
-      );
-
-
-    const maxY =
-      Math.max(
-        padding,
-        window.innerHeight -
-          buttonRect.height -
-          padding
-      );
-
-
-    const randomX =
-      Math.floor(
-        Math.random() * maxX
-      );
-
-
-    const randomY =
-      Math.floor(
-        Math.random() * maxY
-      );
-
-
-    disagreeTerms.style.position =
-      "fixed";
-
-    disagreeTerms.style.left =
-      `${randomX}px`;
-
-    disagreeTerms.style.top =
-      `${randomY}px`;
-
-    disagreeTerms.style.zIndex =
-      "9999";
-
-
-    if (termsMessage) {
-
-      const messages = [
-        "That button is unavailable. 😌",
-        "You already know the answer.",
-        "Nice attempt. 😂",
-        "I DISAGREE button says NO.",
-        "Please stop trying. 😭",
-        "Marriage Department has rejected this option.",
-      ];
-
-
-      termsMessage.textContent =
-        messages[
-          Math.floor(
-            Math.random() *
-              messages.length
-          )
-        ];
-    }
-  }
-
-
-  if (disagreeTerms) {
-
-    disagreeTerms.addEventListener(
-      "mouseenter",
-      moveDisagreeButton
-    );
-
-
-    disagreeTerms.addEventListener(
-      "touchstart",
-      (event) => {
-
-        event.preventDefault();
-
-        moveDisagreeButton();
-
-      },
-      {
-        passive: false,
-      }
-    );
-
-
-    disagreeTerms.addEventListener(
-      "click",
-      (event) => {
-
-        event.preventDefault();
-
-        moveDisagreeButton();
-
-      }
-    );
-  }
-
-
-  /* =========================================================
-     PAGE 4 — NAME NORMALIZATION
-     
-     ALL OF THESE WILL WORK:
-
-     Debangan Paulchowdhury
-     DEBANGAN PAULCHOWDHURY
-     debangan paulchowdhury
-     DeBaNgAn PaUlChOuDhUrY
-
-     DEBANGAN PAUL CHOWDHURY
-     debangan    paulchowdhury
-     Debangan-Paulchowdhury
-     Debangan_Paulchowdhury
-     Debangan.Paulchowdhury
-     
-     and even:
-     "   DEBANGAN---PAUL CHOWDHURY   "
-  ========================================================= */
+     NAME NORMALIZATION
+     ========================================================= */
 
   function normalizeName(value) {
 
-    if (!value) {
-      return "";
-    }
-
-
     return value
-
-      /*
-        Normalize Unicode characters.
-      */
-
-      .normalize("NFKC")
-
-      /*
-        Remove spaces at beginning/end.
-      */
-
-      .trim()
-
-      /*
-        Ignore capitalization.
-      */
-
+      .normalize("NFKD")
+      .replace(
+        /[\u0300-\u036f]/g,
+        ""
+      )
       .toLowerCase()
-
-      /*
-        Keep ONLY alphabetic characters.
-
-        Therefore:
-
-        "DEBANGAN PAUL CHOWDHURY"
-
-        becomes:
-
-        "debanganpaulchowdhury"
-      */
-
-      .replace(/[^a-z]/g, "");
+      .replace(
+        /[^a-z]/g,
+        ""
+      );
   }
 
 
   /* =========================================================
-     NAME CHECK
-  ========================================================= */
+     NAME VERIFICATION
+     ========================================================= */
 
-  function checkName() {
+  fullName.addEventListener(
+    "input",
+    () => {
 
-    if (
-      !fullName ||
-      !nameMessage
-    ) {
-      return;
+      const value =
+        normalizeName(
+          fullName.value
+        );
+
+
+      nameValid =
+        value === REQUIRED_NAME;
+
+
+      /*
+         If the user changes the name after
+         fingerprint verification, invalidate
+         the fingerprint as well.
+      */
+
+      if (!nameValid) {
+
+        fingerprintValid = false;
+
+        fingerprintBtn.disabled =
+          false;
+
+        fingerprintBtn.classList.remove(
+          "scanning"
+        );
+
+        fingerprintBtn.innerHTML =
+          "<span>🖐️</span><small>CLICK TO SCAN</small>";
+
+        scanProgress.classList.add(
+          "hidden"
+        );
+
+        if (progressFill) {
+          progressFill.style.width = "0%";
+        }
+
+      }
+
+
+      if (!value) {
+
+        nameMessage.textContent = "";
+
+      }
+
+      else if (nameValid) {
+
+        nameMessage.textContent =
+          "Identity verified. That is definitely him. 😌❤️";
+
+      }
+
+      else {
+
+        nameMessage.textContent =
+          "Hmm... that does not match the groom's registered name. 👀";
+
+      }
+
+
+      updateFinalizeState();
     }
-
-
-    const rawValue =
-      fullName.value;
-
-
-    const normalizedValue =
-      normalizeName(rawValue);
-
-
-    /* =========================================
-       CORRECT NAME
-    ========================================= */
-
-    if (
-      normalizedValue ===
-      CORRECT_NAME
-    ) {
-
-      nameVerified = true;
-
-
-      nameMessage.textContent =
-        "Identity verified. Very suspiciously accurate. 😌❤️";
-
-
-      nameMessage.classList.remove(
-        "error"
-      );
-
-      nameMessage.classList.add(
-        "success"
-      );
-
-
-      fullName.classList.remove(
-        "invalid"
-      );
-
-      fullName.classList.add(
-        "valid"
-      );
-
-
-      updateFinalizeButton();
-
-
-      return;
-    }
-
-
-    /* =========================================
-       EMPTY
-    ========================================= */
-
-    if (
-      normalizedValue.length === 0
-    ) {
-
-      nameVerified = false;
-
-      nameMessage.textContent = "";
-
-      fullName.classList.remove(
-        "valid"
-      );
-
-      fullName.classList.remove(
-        "invalid"
-      );
-
-      updateFinalizeButton();
-
-      return;
-    }
-
-
-    /* =========================================
-       WRONG
-    ========================================= */
-
-    nameVerified = false;
-
-
-    nameMessage.textContent =
-      "Hmm... that's not the groom's name. Try again. 👀";
-
-
-    nameMessage.classList.remove(
-      "success"
-    );
-
-    nameMessage.classList.add(
-      "error"
-    );
-
-
-    fullName.classList.remove(
-      "valid"
-    );
-
-    fullName.classList.add(
-      "invalid"
-    );
-
-
-    updateFinalizeButton();
-  }
-
-
-  if (fullName) {
-
-    fullName.addEventListener(
-      "input",
-      checkName
-    );
-
-
-    fullName.addEventListener(
-      "blur",
-      checkName
-    );
-  }
+  );
 
 
   /* =========================================================
      FINALIZE BUTTON STATE
-  ========================================================= */
+     ========================================================= */
 
-  function updateFinalizeButton() {
+  function updateFinalizeState() {
 
-    if (!finalizeBtn) {
-      return;
-    }
+    const ready =
+      nameValid &&
+      fingerprintValid &&
+      !scanning;
 
 
-    if (
-      nameVerified &&
-      fingerprintVerified
-    ) {
-
-      finalizeBtn.classList.remove(
-        "hidden"
-      );
-
-    } else {
-
-      finalizeBtn.classList.add(
-        "hidden"
-      );
-    }
+    finalizeBtn.classList.toggle(
+      "hidden",
+      !ready
+    );
   }
 
 
   /* =========================================================
-     PAGE 4 — FINGERPRINT
-  ========================================================= */
+     FINGERPRINT SCAN
+     ========================================================= */
 
-  function startFingerprintScan() {
+  fingerprintBtn.addEventListener(
+    "click",
+    () => {
 
-    if (
-      fingerprintScanning ||
-      fingerprintVerified
-    ) {
-      return;
-    }
-
-
-    fingerprintScanning = true;
-
-
-    if (scanProgress) {
-
-      scanProgress.classList.remove(
-        "hidden"
-      );
-    }
+      if (
+        !nameValid ||
+        scanning ||
+        fingerprintValid
+      ) {
+        return;
+      }
 
 
-    if (fingerprintMessage) {
-
-      fingerprintMessage.textContent = "";
-
-      fingerprintMessage.classList.remove(
-        "success"
-      );
-
-      fingerprintMessage.classList.remove(
-        "error"
-      );
-    }
-
-
-    if (fingerprintBtn) {
-
-      fingerprintBtn.disabled = true;
+      scanning = true;
 
       fingerprintBtn.classList.add(
         "scanning"
       );
-    }
 
-
-    const progressFill =
-      document.querySelector(
-        ".progress-fill"
+      scanProgress.classList.remove(
+        "hidden"
       );
 
+      fingerprintMessage.textContent =
+        "";
 
-    let progress = 0;
+      progressFill.style.width =
+        "0%";
 
-
-    const scanMessages = [
-      "Scanning fingerprint...",
-      "Checking identity...",
-      "Comparing with husband database...",
-      "Analyzing romantic commitment...",
-      "Checking suspicious levels of love...",
-      "Verification almost complete...",
-    ];
+      updateFinalizeState();
 
 
-    let messageIndex = 0;
+      let progress = 0;
 
 
-    if (scanText) {
+      const steps = [
+        "Reading fingerprint...",
+        "Comparing identity...",
+        "Checking husband database...",
+        "Confirming Anushka's approval...",
+        "Verification complete. ❤️",
+      ];
 
-      scanText.textContent =
-        scanMessages[0];
+
+      const timer =
+        setInterval(
+          () => {
+
+            progress += 4;
+
+
+            progressFill.style.width =
+              `${Math.min(
+                progress,
+                100
+              )}%`;
+
+
+            const stepIndex =
+              Math.min(
+                Math.floor(
+                  progress / 20
+                ),
+                steps.length - 1
+              );
+
+
+            scanText.textContent =
+              steps[stepIndex];
+
+
+            if (
+              progress >= 100
+            ) {
+
+              clearInterval(
+                timer
+              );
+
+
+              scanning = false;
+
+              fingerprintValid =
+                true;
+
+
+              fingerprintBtn.classList.remove(
+                "scanning"
+              );
+
+              fingerprintBtn.disabled =
+                true;
+
+
+              fingerprintBtn.innerHTML =
+                "<span>✅</span><small>VERIFIED</small>";
+
+
+              fingerprintMessage.textContent =
+                "Fingerprint accepted. Your fate is now officially sealed. 💍";
+
+
+              updateFinalizeState();
+
+            }
+
+          },
+          100
+        );
     }
+  );
 
 
-    const interval =
-      setInterval(() => {
+  /* =========================================================
+     PAGE 4 → PAGE 5 RING PAGE
+     ========================================================= */
 
-        progress += 5;
+  function startRingPage() {
 
+    /*
+       Clear any old timers first.
+       This prevents duplicate transitions if
+       someone somehow clicks multiple times.
+    */
 
-        if (progressFill) {
-
-          progressFill.style.width =
-            `${progress}%`;
-        }
-
-
-        if (
-          progress % 15 === 0 &&
-          messageIndex <
-            scanMessages.length - 1
-        ) {
-
-          messageIndex++;
-
-
-          if (scanText) {
-
-            scanText.textContent =
-              scanMessages[
-                messageIndex
-              ];
-          }
-        }
-
-
-        if (progress >= 100) {
-
-          clearInterval(interval);
-
-
-          fingerprintScanning =
-            false;
-
-          fingerprintVerified =
-            true;
-
-
-          if (scanText) {
-
-            scanText.textContent =
-              "Fingerprint verified successfully. ❤️";
-          }
-
-
-          if (fingerprintMessage) {
-
-            fingerprintMessage.textContent =
-              "Fingerprint accepted. You are officially suspiciously husband-like. 😂💍";
-
-            fingerprintMessage.classList.add(
-              "success"
-            );
-          }
-
-
-          if (fingerprintBtn) {
-
-            fingerprintBtn.classList.remove(
-              "scanning"
-            );
-
-            fingerprintBtn.classList.add(
-              "verified"
-            );
-          }
-
-
-          updateFinalizeButton();
-        }
-
-      }, 100);
-  }
-
-
-  if (fingerprintBtn) {
-
-    fingerprintBtn.addEventListener(
-      "click",
-      startFingerprintScan
+    clearTimeout(
+      ringRevealTimer
     );
+
+    clearTimeout(
+      ringCertificateTimer
+    );
+
+
+    /*
+       Start with the reveal hidden.
+    */
+
+    ringReveal.classList.add(
+      "hidden"
+    );
+
+
+    /*
+       FIRST MESSAGE:
+
+       Wait exactly 5 seconds.
+    */
+
+    ringRevealTimer =
+      setTimeout(
+        () => {
+
+          ringReveal.classList.remove(
+            "hidden"
+          );
+
+
+          /*
+             SECOND TIMER:
+
+             Give him enough time to read
+             the emotional message.
+
+             Then move to certificate.
+          */
+
+          ringCertificateTimer =
+            setTimeout(
+              () => {
+
+                showCertificate();
+
+              },
+              4500
+            );
+
+        },
+        5000
+      );
   }
 
 
   /* =========================================================
-     TIMESTAMP
-  ========================================================= */
+     CERTIFICATE
+     ========================================================= */
 
-  function getFormattedTimestamp() {
+  function showCertificate() {
 
     const now = new Date();
 
 
-    const day =
-      String(
-        now.getDate()
-      ).padStart(2, "0");
+    certificateDate.textContent =
+      `Registered on ${
+        now.toLocaleDateString(
+          undefined,
+          {
+            day: "2-digit",
+            month: "long",
+            year: "numeric",
+          }
+        )
+      } at ${
+        now.toLocaleTimeString(
+          undefined,
+          {
+            hour: "2-digit",
+            minute: "2-digit",
+            hour12: true,
+          }
+        )
+      }`;
 
 
-    const month =
-      String(
-        now.getMonth() + 1
-      ).padStart(2, "0");
+    showPage(
+      "certificate"
+    );
 
 
-    const year =
-      now.getFullYear();
+    /*
+       IMPORTANT FIX:
+
+       OLD:
+       3500ms
+
+       NEW:
+       12000ms
+
+       The certificate now remains
+       visible for 12 full seconds.
+    */
+
+    setTimeout(
+      () => {
+
+        showPage("party");
+
+        createConfetti();
 
 
-    const hours =
-      String(
-        now.getHours()
-      ).padStart(2, "0");
+        giftTimer =
+          setTimeout(
+            () => {
 
+              giftReveal.classList.remove(
+                "hidden"
+              );
 
-    const minutes =
-      String(
-        now.getMinutes()
-      ).padStart(2, "0");
+            },
+            1200
+          );
 
-
-    const seconds =
-      String(
-        now.getSeconds()
-      ).padStart(2, "0");
-
-
-    return (
-      `${day}.${month}.${year}` +
-      ` at ` +
-      `${hours}:${minutes}:${seconds}`
+      },
+      12000
     );
   }
 
 
   /* =========================================================
-     PAGE 4 → PAGE 5
-     
-     NEW RING PAGE SEQUENCE
-     
-     1. Show ring page immediately.
-     2. Wait 5 seconds.
-     3. Reveal emotional/funny message.
-     4. Keep it visible for 4 seconds.
-     5. Automatically continue to certificate.
-  ========================================================= */
+     PAGE 4 → RING
+     ========================================================= */
 
-  function startRingSequence() {
+  finalizeBtn.addEventListener(
+    "click",
+    () => {
 
-    if (ringSequenceStarted) {
-      return;
-    }
-
-
-    ringSequenceStarted = true;
-
-
-    showPage("ring");
-
-
-    if (ringReveal) {
-
-      ringReveal.classList.add(
-        "hidden"
-      );
-    }
-
-
-    if (ringLoading) {
-
-      ringLoading.classList.remove(
-        "hidden"
-      );
-    }
-
-
-    /*
-      Wait exactly 5 seconds before
-      revealing the "you don't have a ring"
-      message.
-    */
-
-    setTimeout(() => {
-
-      if (ringLoading) {
-
-        ringLoading.classList.add(
-          "hidden"
-        );
-      }
-
-
-      if (ringReveal) {
-
-        ringReveal.classList.remove(
-          "hidden"
-        );
+      if (
+        !nameValid ||
+        !fingerprintValid ||
+        scanning
+      ) {
+        return;
       }
 
 
       /*
-        Give him some time to actually
-        read the message.
-
-        Then automatically continue
-        to the certificate.
+         Go to the new ring page first.
       */
 
-      setTimeout(() => {
-
-        showCertificate();
-
-      }, 4000);
-
-    }, 5000);
-  }
+      showPage(
+        "ring"
+      );
 
 
-  /* =========================================================
-     SHOW CERTIFICATE
-  ========================================================= */
+      startRingPage();
 
-  function showCertificate() {
-
-    const timestamp =
-      getFormattedTimestamp();
-
-
-    if (certificateTime) {
-
-      certificateTime.textContent =
-        `Registered on ${timestamp}`;
     }
-
-
-    showPage("certificate");
-  }
+  );
 
 
   /* =========================================================
-     FINALIZE MARRIAGE
-  ========================================================= */
+     PARTY → GIFT
+     ========================================================= */
 
-  if (finalizeBtn) {
+  openGift.addEventListener(
+    "click",
+    () => {
 
-    finalizeBtn.addEventListener(
-      "click",
-      () => {
+      if (giftTimer) {
 
-        if (
-          !nameVerified ||
-          !fingerprintVerified
-        ) {
-          return;
-        }
-
-
-        /*
-          NEW:
-          Do NOT go directly to certificate.
-
-          Go to the ring page first.
-        */
-
-        startRingSequence();
-
-      }
-    );
-  }
-
-
-  /* =========================================================
-     PAGE 6 — CERTIFICATE CONTINUE
-     
-     Certificate stays on screen until
-     HE presses the button.
-  ========================================================= */
-
-  if (certificateContinue) {
-
-    certificateContinue.addEventListener(
-      "click",
-      () => {
-
-        showPartyPage();
-
-      }
-    );
-  }
-
-
-  /* =========================================================
-     PARTY PAGE
-  ========================================================= */
-
-  function showPartyPage() {
-
-    if (partyStarted) {
-      return;
-    }
-
-
-    partyStarted = true;
-
-
-    showPage("party");
-
-
-    startConfetti();
-
-
-    /*
-      Gift appears after 1.5 seconds.
-    */
-
-    setTimeout(() => {
-
-      if (giftReveal) {
-
-        giftReveal.classList.remove(
-          "hidden"
+        clearTimeout(
+          giftTimer
         );
+
       }
 
-    }, 1500);
-  }
+
+      showPage(
+        "gift"
+      );
+
+
+      createKisses();
+
+
+      setTimeout(
+        () => {
+
+          kissMessage.classList.remove(
+            "hidden"
+          );
+
+        },
+        2000
+      );
+
+    }
+  );
 
 
   /* =========================================================
      CONFETTI
-  ========================================================= */
+     ========================================================= */
 
-  function startConfetti() {
+  function createConfetti() {
 
-    if (!confettiContainer) {
-      return;
-    }
-
-
-    confettiContainer.innerHTML = "";
+    const container =
+      $("confettiContainer");
 
 
-    const pieces = 90;
+    container.innerHTML =
+      "";
+
+
+    const pieces = 85;
 
 
     for (
@@ -1227,324 +849,112 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
       piece.className =
-        "confetti-piece";
-
-
-      const randomLeft =
-        Math.random() * 100;
-
-
-      const randomDelay =
-        Math.random() * 2;
-
-
-      const randomDuration =
-        2.5 +
-        Math.random() * 3;
-
-
-      const randomRotation =
-        Math.random() * 360;
+        "confetti";
 
 
       piece.style.left =
-        `${randomLeft}%`;
-
-
-      piece.style.animationDelay =
-        `${randomDelay}s`;
+        `${Math.random() * 100}%`;
 
 
       piece.style.animationDuration =
-        `${randomDuration}s`;
+        `${2.4 + Math.random() * 2.5}s`;
+
+
+      piece.style.animationDelay =
+        `${Math.random() * 1.4}s`;
+
+
+      piece.style.setProperty(
+        "--drift",
+        `${-100 + Math.random() * 200}px`
+      );
+
+
+      piece.style.background =
+        Math.random() > 0.5
+          ? "#8f1d2c"
+          : "#b58a3b";
 
 
       piece.style.transform =
-        `rotate(${randomRotation}deg)`;
+        `rotate(${Math.random() * 360}deg)`;
 
 
-      const size =
-        5 +
-        Math.random() * 8;
-
-
-      piece.style.width =
-        `${size}px`;
-
-
-      piece.style.height =
-        `${size * 1.4}px`;
-
-
-      confettiContainer.appendChild(
+      container.appendChild(
         piece
       );
+
     }
-
-
-    setTimeout(() => {
-
-      if (confettiContainer) {
-
-        confettiContainer.innerHTML =
-          "";
-      }
-
-    }, 7000);
   }
 
 
   /* =========================================================
-     OPEN GIFT
-  ========================================================= */
+     KISSES
+     ========================================================= */
 
-  if (openGift) {
+  function createKisses() {
 
-    openGift.addEventListener(
-      "click",
-      () => {
-
-        if (giftOpened) {
-          return;
-        }
+    kissContainer.innerHTML =
+      "";
 
 
-        giftOpened = true;
-
-
-        showPage("gift");
-
-
-        startKisses();
-
-
-        /*
-          Final message appears after
-          2 seconds.
-        */
-
-        setTimeout(() => {
-
-          if (kissMessage) {
-
-            kissMessage.classList.remove(
-              "hidden"
-            );
-          }
-
-        }, 2000);
-      }
-    );
-  }
-
-
-  /* =========================================================
-     FLOATING KISSES
-  ========================================================= */
-
-  function startKisses() {
-
-    if (!kissContainer) {
-      return;
-    }
-
-
-    kissContainer.innerHTML = "";
-
-
-    /*
-      Initial kisses.
-    */
-
-    for (
-      let i = 0;
-      i < 25;
-      i++
-    ) {
-
-      createKiss(true);
-    }
-
-
-    let kissCount = 0;
-
-
-    const kissInterval =
-      setInterval(() => {
-
-        if (
-          currentPage !==
-          "gift"
-        ) {
-
-          clearInterval(
-            kissInterval
-          );
-
-          return;
-        }
-
-
-        createKiss(false);
-
-
-        kissCount++;
-
-
-        if (
-          kissCount >= 80
-        ) {
-
-          clearInterval(
-            kissInterval
-          );
-        }
-
-      }, 350);
-  }
-
-
-  function createKiss(initial) {
-
-    if (!kissContainer) {
-      return;
-    }
-
-
-    const kiss =
-      document.createElement(
-        "span"
-      );
-
-
-    kiss.className =
-      "floating-kiss";
-
-
-    kiss.textContent = [
+    const kissEmojis = [
       "💋",
       "❤️",
       "💕",
+      "💖",
       "💗",
       "😘",
-      "💖",
-    ][
-      Math.floor(
-        Math.random() * 6
-      )
+      "💋",
     ];
 
 
-    const left =
-      Math.random() * 100;
+    for (
+      let i = 0;
+      i < 45;
+      i++
+    ) {
+
+      const kiss =
+        document.createElement(
+          "span"
+        );
 
 
-    const size =
-      18 +
-      Math.random() * 24;
+      kiss.className =
+        "kiss";
 
 
-    const duration =
-      4 +
-      Math.random() * 5;
+      kiss.textContent =
+        kissEmojis[
+          Math.floor(
+            Math.random() *
+              kissEmojis.length
+          )
+        ];
 
 
-    const delay =
-      initial
-        ? Math.random() * 4
-        : 0;
+      kiss.style.left =
+        `${Math.random() * 100}%`;
 
 
-    kiss.style.left =
-      `${left}%`;
+      kiss.style.animationDuration =
+        `${4 + Math.random() * 5}s`;
 
 
-    kiss.style.fontSize =
-      `${size}px`;
+      kiss.style.animationDelay =
+        `${Math.random() * 3}s`;
 
 
-    kiss.style.animationDuration =
-      `${duration}s`;
+      kiss.style.fontSize =
+        `${1.1 + Math.random() * 1.3}rem`;
 
 
-    kiss.style.animationDelay =
-      `${delay}s`;
+      kissContainer.appendChild(
+        kiss
+      );
 
-
-    kissContainer.appendChild(
-      kiss
-    );
-
-
-    setTimeout(() => {
-
-      kiss.remove();
-
-    }, (
-      duration +
-      delay
-    ) * 1000 + 500);
-  }
-
-
-  /* =========================================================
-     RESIZE SAFETY
-  ========================================================= */
-
-  window.addEventListener(
-    "resize",
-    () => {
-
-      if (
-        currentPage ===
-        "decision" &&
-        letMeBreathe
-      ) {
-
-        const rect =
-          letMeBreathe.getBoundingClientRect();
-
-
-        if (
-          rect.right >
-            window.innerWidth ||
-          rect.bottom >
-            window.innerHeight
-        ) {
-
-          moveBreathingButton();
-        }
-      }
-
-
-      if (
-        currentPage ===
-        "terms" &&
-        disagreeTerms
-      ) {
-
-        const rect =
-          disagreeTerms.getBoundingClientRect();
-
-
-        if (
-          rect.right >
-            window.innerWidth ||
-          rect.bottom >
-            window.innerHeight
-        ) {
-
-          moveDisagreeButton();
-        }
-      }
     }
-  );
-
-
-  /* =========================================================
-     START
-  ========================================================= */
-
-  showPage("decision");
+  }
 
 });
