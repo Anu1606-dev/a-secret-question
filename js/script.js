@@ -1,4 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
+
   /* =========================================================
      CONFIG
   ========================================================= */
@@ -7,7 +8,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
   /* =========================================================
-     PAGE REFERENCES
+     PAGES
   ========================================================= */
 
   const pages = {
@@ -15,6 +16,10 @@ document.addEventListener("DOMContentLoaded", () => {
     declaration: document.getElementById("page-declaration"),
     terms: document.getElementById("page-terms"),
     registration: document.getElementById("page-registration"),
+
+    /* NEW PAGE */
+    ring: document.getElementById("page-ring"),
+
     certificate: document.getElementById("page-certificate"),
     party: document.getElementById("page-party"),
     gift: document.getElementById("page-gift"),
@@ -22,15 +27,23 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
   /* =========================================================
-     ELEMENT REFERENCES
+     ELEMENTS
   ========================================================= */
 
-  const currentDate = document.getElementById("currentDate");
-  const currentTime = document.getElementById("currentTime");
+  const currentDate =
+    document.getElementById("currentDate");
 
-  const obviouslyYes = document.getElementById("obviouslyYes");
-  const letMeBreathe = document.getElementById("letMeBreathe");
-  const decisionWarning = document.getElementById("decisionWarning");
+  const currentTime =
+    document.getElementById("currentTime");
+
+  const obviouslyYes =
+    document.getElementById("obviouslyYes");
+
+  const letMeBreathe =
+    document.getElementById("letMeBreathe");
+
+  const decisionWarning =
+    document.getElementById("decisionWarning");
 
   const declarationContinue =
     document.getElementById("declarationContinue");
@@ -65,17 +78,44 @@ document.addEventListener("DOMContentLoaded", () => {
   const finalizeBtn =
     document.getElementById("finalizeBtn");
 
+
+  /* NEW RING PAGE ELEMENTS */
+
+  const ringReveal =
+    document.getElementById("ringReveal");
+
+  const ringLoading =
+    document.getElementById("ringLoading");
+
+
+  /* CERTIFICATE */
+
+  const certificateTime =
+    document.getElementById("certificateTime");
+
+  const certificateContinue =
+    document.getElementById("certificateContinue");
+
+
+  /* PARTY */
+
   const giftReveal =
     document.getElementById("giftReveal");
 
   const openGift =
     document.getElementById("openGift");
 
+
+  /* GIFT */
+
   const kissContainer =
     document.getElementById("kissContainer");
 
   const kissMessage =
     document.getElementById("kissMessage");
+
+
+  /* CONFETTI */
 
   const confettiContainer =
     document.getElementById("confettiContainer");
@@ -88,13 +128,16 @@ document.addEventListener("DOMContentLoaded", () => {
   let currentPage = "decision";
 
   let nameVerified = false;
+
   let fingerprintVerified = false;
+
   let fingerprintScanning = false;
 
   let partyStarted = false;
+
   let giftOpened = false;
 
-  let certificateTimestamp = null;
+  let ringSequenceStarted = false;
 
 
   /* =========================================================
@@ -102,21 +145,38 @@ document.addEventListener("DOMContentLoaded", () => {
   ========================================================= */
 
   function showPage(pageName) {
+
     Object.values(pages).forEach((page) => {
+
       if (!page) return;
 
       page.classList.remove("active");
-      page.setAttribute("aria-hidden", "true");
+
+      page.setAttribute(
+        "aria-hidden",
+        "true"
+      );
     });
 
-    const targetPage = pages[pageName];
 
-    if (!targetPage) return;
+    const targetPage =
+      pages[pageName];
+
+    if (!targetPage) {
+      return;
+    }
+
 
     targetPage.classList.add("active");
-    targetPage.setAttribute("aria-hidden", "false");
+
+    targetPage.setAttribute(
+      "aria-hidden",
+      "false"
+    );
+
 
     currentPage = pageName;
+
 
     window.scrollTo({
       top: 0,
@@ -126,58 +186,103 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
   /* =========================================================
-     CURRENT DATE + TIME
+     DATE + TIME
   ========================================================= */
 
   function updateDateTime() {
+
     const now = new Date();
 
+
     if (currentDate) {
-      const day = String(now.getDate()).padStart(2, "0");
-      const month = String(now.getMonth() + 1).padStart(2, "0");
-      const year = now.getFullYear();
+
+      const day =
+        String(now.getDate()).padStart(2, "0");
+
+      const month =
+        String(now.getMonth() + 1).padStart(
+          2,
+          "0"
+        );
+
+      const year =
+        now.getFullYear();
+
 
       currentDate.textContent =
         `${day}.${month}.${year}`;
     }
 
+
     if (currentTime) {
-      const hours = String(now.getHours()).padStart(2, "0");
-      const minutes = String(now.getMinutes()).padStart(2, "0");
-      const seconds = String(now.getSeconds()).padStart(2, "0");
+
+      const hours =
+        String(now.getHours()).padStart(
+          2,
+          "0"
+        );
+
+      const minutes =
+        String(now.getMinutes()).padStart(
+          2,
+          "0"
+        );
+
+      const seconds =
+        String(now.getSeconds()).padStart(
+          2,
+          "0"
+        );
+
 
       currentTime.textContent =
         `${hours}:${minutes}:${seconds}`;
     }
   }
 
+
   updateDateTime();
 
-  setInterval(updateDateTime, 1000);
+  setInterval(
+    updateDateTime,
+    1000
+  );
 
 
   /* =========================================================
-     PAGE 1 — DECISION
+     PAGE 1 — YES
   ========================================================= */
 
   if (obviouslyYes) {
-    obviouslyYes.addEventListener("click", () => {
-      showPage("declaration");
-    });
+
+    obviouslyYes.addEventListener(
+      "click",
+      () => {
+
+        showPage("declaration");
+
+      }
+    );
   }
 
 
   /* =========================================================
-     MOVING "LET ME BREATHE" BUTTON
+     PAGE 1 — MOVING "LET ME BREATHE"
   ========================================================= */
 
   function moveBreathingButton() {
-    if (!letMeBreathe) return;
+
+    if (!letMeBreathe) {
+      return;
+    }
+
 
     const buttonRect =
       letMeBreathe.getBoundingClientRect();
 
+
     const padding = 20;
+
 
     const maxX =
       Math.max(
@@ -187,6 +292,7 @@ document.addEventListener("DOMContentLoaded", () => {
           padding
       );
 
+
     const maxY =
       Math.max(
         padding,
@@ -195,22 +301,34 @@ document.addEventListener("DOMContentLoaded", () => {
           padding
       );
 
+
     const randomX =
       Math.floor(
         Math.random() * maxX
       );
+
 
     const randomY =
       Math.floor(
         Math.random() * maxY
       );
 
-    letMeBreathe.style.position = "fixed";
-    letMeBreathe.style.left = `${randomX}px`;
-    letMeBreathe.style.top = `${randomY}px`;
-    letMeBreathe.style.zIndex = "9999";
+
+    letMeBreathe.style.position =
+      "fixed";
+
+    letMeBreathe.style.left =
+      `${randomX}px`;
+
+    letMeBreathe.style.top =
+      `${randomY}px`;
+
+    letMeBreathe.style.zIndex =
+      "9999";
+
 
     if (decisionWarning) {
+
       const messages = [
         "NO!! You should have thought about it earlier! 😭",
         "WE WILL DO IT RIGHT NOW!! 💍",
@@ -223,71 +341,95 @@ document.addEventListener("DOMContentLoaded", () => {
         "You cannot escape your destiny. 😂",
       ];
 
+
       decisionWarning.textContent =
         messages[
           Math.floor(
-            Math.random() * messages.length
+            Math.random() *
+              messages.length
           )
         ];
     }
   }
 
+
   if (letMeBreathe) {
+
     letMeBreathe.addEventListener(
       "mouseenter",
       moveBreathingButton
     );
 
+
     letMeBreathe.addEventListener(
       "touchstart",
       (event) => {
+
         event.preventDefault();
+
         moveBreathingButton();
+
       },
-      { passive: false }
+      {
+        passive: false,
+      }
     );
+
 
     letMeBreathe.addEventListener(
       "click",
       (event) => {
+
         event.preventDefault();
+
         moveBreathingButton();
+
       }
     );
   }
 
 
   /* =========================================================
-     PAGE 2 — DECLARATION
+     PAGE 2
   ========================================================= */
 
   if (declarationContinue) {
+
     declarationContinue.addEventListener(
       "click",
       () => {
+
         showPage("terms");
+
       }
     );
   }
 
 
   /* =========================================================
-     PAGE 3 — TERMS
+     PAGE 3 — AGREE
   ========================================================= */
 
   if (agreeTerms) {
+
     agreeTerms.addEventListener(
       "click",
       () => {
+
         if (termsMessage) {
+
           termsMessage.textContent =
             "Excellent. Your decision has been officially recorded. 😌❤️";
         }
 
+
         agreeTerms.disabled = true;
 
+
         setTimeout(() => {
+
           showPage("registration");
+
         }, 900);
       }
     );
@@ -295,16 +437,22 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
   /* =========================================================
-     MOVING "I DISAGREE" BUTTON
+     PAGE 3 — DISAGREE BUTTON
   ========================================================= */
 
   function moveDisagreeButton() {
-    if (!disagreeTerms) return;
+
+    if (!disagreeTerms) {
+      return;
+    }
+
 
     const buttonRect =
       disagreeTerms.getBoundingClientRect();
 
+
     const padding = 15;
+
 
     const maxX =
       Math.max(
@@ -314,6 +462,7 @@ document.addEventListener("DOMContentLoaded", () => {
           padding
       );
 
+
     const maxY =
       Math.max(
         padding,
@@ -322,22 +471,34 @@ document.addEventListener("DOMContentLoaded", () => {
           padding
       );
 
+
     const randomX =
       Math.floor(
         Math.random() * maxX
       );
+
 
     const randomY =
       Math.floor(
         Math.random() * maxY
       );
 
-    disagreeTerms.style.position = "fixed";
-    disagreeTerms.style.left = `${randomX}px`;
-    disagreeTerms.style.top = `${randomY}px`;
-    disagreeTerms.style.zIndex = "9999";
+
+    disagreeTerms.style.position =
+      "fixed";
+
+    disagreeTerms.style.left =
+      `${randomX}px`;
+
+    disagreeTerms.style.top =
+      `${randomY}px`;
+
+    disagreeTerms.style.zIndex =
+      "9999";
+
 
     if (termsMessage) {
+
       const messages = [
         "That button is unavailable. 😌",
         "You already know the answer.",
@@ -347,35 +508,49 @@ document.addEventListener("DOMContentLoaded", () => {
         "Marriage Department has rejected this option.",
       ];
 
+
       termsMessage.textContent =
         messages[
           Math.floor(
-            Math.random() * messages.length
+            Math.random() *
+              messages.length
           )
         ];
     }
   }
 
+
   if (disagreeTerms) {
+
     disagreeTerms.addEventListener(
       "mouseenter",
       moveDisagreeButton
     );
 
+
     disagreeTerms.addEventListener(
       "touchstart",
       (event) => {
+
         event.preventDefault();
+
         moveDisagreeButton();
+
       },
-      { passive: false }
+      {
+        passive: false,
+      }
     );
+
 
     disagreeTerms.addEventListener(
       "click",
       (event) => {
+
         event.preventDefault();
+
         moveDisagreeButton();
+
       }
     );
   }
@@ -384,98 +559,148 @@ document.addEventListener("DOMContentLoaded", () => {
   /* =========================================================
      PAGE 4 — NAME NORMALIZATION
      
-     IMPORTANT:
-     This handles different ways of typing the name.
-
-     Examples:
+     ALL OF THESE WILL WORK:
 
      Debangan Paulchowdhury
      DEBANGAN PAULCHOWDHURY
      debangan paulchowdhury
      DeBaNgAn PaUlChOuDhUrY
-     DEBANGANPAULCHOWDHURY
+
+     DEBANGAN PAUL CHOWDHURY
      debangan    paulchowdhury
      Debangan-Paulchowdhury
      Debangan_Paulchowdhury
      Debangan.Paulchowdhury
-     " Debangan Paulchowdhury "
+     
+     and even:
+     "   DEBANGAN---PAUL CHOWDHURY   "
   ========================================================= */
 
   function normalizeName(value) {
+
     if (!value) {
       return "";
     }
 
+
     return value
+
+      /*
+        Normalize Unicode characters.
+      */
+
       .normalize("NFKC")
+
+      /*
+        Remove spaces at beginning/end.
+      */
+
       .trim()
+
+      /*
+        Ignore capitalization.
+      */
+
       .toLowerCase()
+
+      /*
+        Keep ONLY alphabetic characters.
+
+        Therefore:
+
+        "DEBANGAN PAUL CHOWDHURY"
+
+        becomes:
+
+        "debanganpaulchowdhury"
+      */
+
       .replace(/[^a-z]/g, "");
   }
 
 
   /* =========================================================
-     NAME VERIFICATION
+     NAME CHECK
   ========================================================= */
 
   function checkName() {
-    if (!fullName || !nameMessage) {
+
+    if (
+      !fullName ||
+      !nameMessage
+    ) {
       return;
     }
 
-    const rawValue = fullName.value;
+
+    const rawValue =
+      fullName.value;
+
+
     const normalizedValue =
       normalizeName(rawValue);
 
-    /*
-      Compare only normalized alphabetic characters.
 
-      So:
-
-      "DEBANGAN PAUL CHOWDHURY"
-
-      becomes:
-
-      "debanganpaulchowdhury"
-
-      and:
-
-      "Debangan Paulchowdhury"
-
-      also becomes:
-
-      "debanganpaulchowdhury"
-    */
+    /* =========================================
+       CORRECT NAME
+    ========================================= */
 
     if (
-      normalizedValue === CORRECT_NAME
+      normalizedValue ===
+      CORRECT_NAME
     ) {
+
       nameVerified = true;
+
 
       nameMessage.textContent =
         "Identity verified. Very suspiciously accurate. 😌❤️";
 
-      nameMessage.classList.remove("error");
-      nameMessage.classList.add("success");
 
-      fullName.classList.remove("invalid");
-      fullName.classList.add("valid");
+      nameMessage.classList.remove(
+        "error"
+      );
+
+      nameMessage.classList.add(
+        "success"
+      );
+
+
+      fullName.classList.remove(
+        "invalid"
+      );
+
+      fullName.classList.add(
+        "valid"
+      );
+
 
       updateFinalizeButton();
+
 
       return;
     }
 
 
-    /* Empty input */
+    /* =========================================
+       EMPTY
+    ========================================= */
 
-    if (normalizedValue.length === 0) {
+    if (
+      normalizedValue.length === 0
+    ) {
+
       nameVerified = false;
 
       nameMessage.textContent = "";
 
-      fullName.classList.remove("valid");
-      fullName.classList.remove("invalid");
+      fullName.classList.remove(
+        "valid"
+      );
+
+      fullName.classList.remove(
+        "invalid"
+      );
 
       updateFinalizeButton();
 
@@ -483,28 +708,46 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
 
-    /* Incorrect input */
+    /* =========================================
+       WRONG
+    ========================================= */
 
     nameVerified = false;
+
 
     nameMessage.textContent =
       "Hmm... that's not the groom's name. Try again. 👀";
 
-    nameMessage.classList.remove("success");
-    nameMessage.classList.add("error");
 
-    fullName.classList.remove("valid");
-    fullName.classList.add("invalid");
+    nameMessage.classList.remove(
+      "success"
+    );
+
+    nameMessage.classList.add(
+      "error"
+    );
+
+
+    fullName.classList.remove(
+      "valid"
+    );
+
+    fullName.classList.add(
+      "invalid"
+    );
+
 
     updateFinalizeButton();
   }
 
 
   if (fullName) {
+
     fullName.addEventListener(
       "input",
       checkName
     );
+
 
     fullName.addEventListener(
       "blur",
@@ -514,24 +757,40 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
   /* =========================================================
-     PAGE 4 — FINGERPRINT SCAN
+     FINALIZE BUTTON STATE
   ========================================================= */
 
   function updateFinalizeButton() {
-    if (!finalizeBtn) return;
+
+    if (!finalizeBtn) {
+      return;
+    }
+
 
     if (
       nameVerified &&
       fingerprintVerified
     ) {
-      finalizeBtn.classList.remove("hidden");
+
+      finalizeBtn.classList.remove(
+        "hidden"
+      );
+
     } else {
-      finalizeBtn.classList.add("hidden");
+
+      finalizeBtn.classList.add(
+        "hidden"
+      );
     }
   }
 
 
+  /* =========================================================
+     PAGE 4 — FINGERPRINT
+  ========================================================= */
+
   function startFingerprintScan() {
+
     if (
       fingerprintScanning ||
       fingerprintVerified
@@ -539,29 +798,50 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
+
     fingerprintScanning = true;
 
+
     if (scanProgress) {
-      scanProgress.classList.remove("hidden");
+
+      scanProgress.classList.remove(
+        "hidden"
+      );
     }
+
 
     if (fingerprintMessage) {
+
       fingerprintMessage.textContent = "";
-      fingerprintMessage.classList.remove("success");
-      fingerprintMessage.classList.remove("error");
+
+      fingerprintMessage.classList.remove(
+        "success"
+      );
+
+      fingerprintMessage.classList.remove(
+        "error"
+      );
     }
 
+
     if (fingerprintBtn) {
+
       fingerprintBtn.disabled = true;
-      fingerprintBtn.classList.add("scanning");
+
+      fingerprintBtn.classList.add(
+        "scanning"
+      );
     }
+
 
     const progressFill =
       document.querySelector(
         ".progress-fill"
       );
 
+
     let progress = 0;
+
 
     const scanMessages = [
       "Scanning fingerprint...",
@@ -572,47 +852,70 @@ document.addEventListener("DOMContentLoaded", () => {
       "Verification almost complete...",
     ];
 
+
     let messageIndex = 0;
 
+
     if (scanText) {
+
       scanText.textContent =
         scanMessages[0];
     }
 
+
     const interval =
       setInterval(() => {
+
         progress += 5;
 
+
         if (progressFill) {
+
           progressFill.style.width =
             `${progress}%`;
         }
+
 
         if (
           progress % 15 === 0 &&
           messageIndex <
             scanMessages.length - 1
         ) {
+
           messageIndex++;
 
+
           if (scanText) {
+
             scanText.textContent =
-              scanMessages[messageIndex];
+              scanMessages[
+                messageIndex
+              ];
           }
         }
 
+
         if (progress >= 100) {
+
           clearInterval(interval);
 
-          fingerprintScanning = false;
-          fingerprintVerified = true;
+
+          fingerprintScanning =
+            false;
+
+          fingerprintVerified =
+            true;
+
 
           if (scanText) {
+
             scanText.textContent =
               "Fingerprint verified successfully. ❤️";
           }
 
+
           if (fingerprintMessage) {
+
             fingerprintMessage.textContent =
               "Fingerprint accepted. You are officially suspiciously husband-like. 😂💍";
 
@@ -621,7 +924,9 @@ document.addEventListener("DOMContentLoaded", () => {
             );
           }
 
+
           if (fingerprintBtn) {
+
             fingerprintBtn.classList.remove(
               "scanning"
             );
@@ -631,13 +936,16 @@ document.addEventListener("DOMContentLoaded", () => {
             );
           }
 
+
           updateFinalizeButton();
         }
+
       }, 100);
   }
 
 
   if (fingerprintBtn) {
+
     fingerprintBtn.addEventListener(
       "click",
       startFingerprintScan
@@ -646,155 +954,170 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
   /* =========================================================
-     CERTIFICATE TIMESTAMP
+     TIMESTAMP
   ========================================================= */
 
   function getFormattedTimestamp() {
+
     const now = new Date();
 
+
     const day =
-      String(now.getDate()).padStart(2, "0");
+      String(
+        now.getDate()
+      ).padStart(2, "0");
+
 
     const month =
-      String(now.getMonth() + 1).padStart(
-        2,
-        "0"
-      );
+      String(
+        now.getMonth() + 1
+      ).padStart(2, "0");
+
 
     const year =
       now.getFullYear();
 
+
     const hours =
-      String(now.getHours()).padStart(
-        2,
-        "0"
-      );
+      String(
+        now.getHours()
+      ).padStart(2, "0");
+
 
     const minutes =
-      String(now.getMinutes()).padStart(
-        2,
-        "0"
-      );
+      String(
+        now.getMinutes()
+      ).padStart(2, "0");
+
 
     const seconds =
-      String(now.getSeconds()).padStart(
-        2,
-        "0"
-      );
-
-    return `${day}.${month}.${year} at ${hours}:${minutes}:${seconds}`;
-  }
+      String(
+        now.getSeconds()
+      ).padStart(2, "0");
 
 
-  /* =========================================================
-     PAGE 5 — CERTIFICATE BUTTON
-     
-     IMPORTANT FIX #2:
-     The certificate no longer automatically changes
-     to the party page.
-
-     We create a "Continue to Celebration" button
-     dynamically so the user can read the complete
-     certificate first.
-  ========================================================= */
-
-  function createCertificateContinueButton() {
-    const certificatePage =
-      pages.certificate;
-
-    if (!certificatePage) {
-      return;
-    }
-
-    /*
-      Don't create the button more than once.
-    */
-
-    let existingButton =
-      document.getElementById(
-        "certificateContinue"
-      );
-
-    if (existingButton) {
-      return;
-    }
-
-    existingButton =
-      document.createElement("button");
-
-    existingButton.id =
-      "certificateContinue";
-
-    existingButton.type = "button";
-
-    existingButton.className =
-      "btn btn-primary certificate-continue-btn";
-
-    existingButton.textContent =
-      "CONTINUE TO CELEBRATION 🎉";
-
-    existingButton.addEventListener(
-      "click",
-      () => {
-        showPartyPage();
-      }
+    return (
+      `${day}.${month}.${year}` +
+      ` at ` +
+      `${hours}:${minutes}:${seconds}`
     );
-
-
-    /*
-      Put the button AFTER the certificate,
-      not inside the certificate border.
-      
-      This prevents it from disturbing the
-      actual certificate design.
-    */
-
-    certificatePage.appendChild(
-      existingButton
-    );
-  }
-
-
-  /* =========================================================
-     SHOW PARTY PAGE
-  ========================================================= */
-
-  function showPartyPage() {
-    if (partyStarted) {
-      return;
-    }
-
-    partyStarted = true;
-
-    showPage("party");
-
-    startConfetti();
-
-    /*
-      Gift appears AFTER the user reaches
-      the celebration page.
-    */
-
-    setTimeout(() => {
-      if (giftReveal) {
-        giftReveal.classList.remove(
-          "hidden"
-        );
-      }
-    }, 1500);
   }
 
 
   /* =========================================================
      PAGE 4 → PAGE 5
      
+     NEW RING PAGE SEQUENCE
+     
+     1. Show ring page immediately.
+     2. Wait 5 seconds.
+     3. Reveal emotional/funny message.
+     4. Keep it visible for 4 seconds.
+     5. Automatically continue to certificate.
+  ========================================================= */
+
+  function startRingSequence() {
+
+    if (ringSequenceStarted) {
+      return;
+    }
+
+
+    ringSequenceStarted = true;
+
+
+    showPage("ring");
+
+
+    if (ringReveal) {
+
+      ringReveal.classList.add(
+        "hidden"
+      );
+    }
+
+
+    if (ringLoading) {
+
+      ringLoading.classList.remove(
+        "hidden"
+      );
+    }
+
+
+    /*
+      Wait exactly 5 seconds before
+      revealing the "you don't have a ring"
+      message.
+    */
+
+    setTimeout(() => {
+
+      if (ringLoading) {
+
+        ringLoading.classList.add(
+          "hidden"
+        );
+      }
+
+
+      if (ringReveal) {
+
+        ringReveal.classList.remove(
+          "hidden"
+        );
+      }
+
+
+      /*
+        Give him some time to actually
+        read the message.
+
+        Then automatically continue
+        to the certificate.
+      */
+
+      setTimeout(() => {
+
+        showCertificate();
+
+      }, 4000);
+
+    }, 5000);
+  }
+
+
+  /* =========================================================
+     SHOW CERTIFICATE
+  ========================================================= */
+
+  function showCertificate() {
+
+    const timestamp =
+      getFormattedTimestamp();
+
+
+    if (certificateTime) {
+
+      certificateTime.textContent =
+        `Registered on ${timestamp}`;
+    }
+
+
+    showPage("certificate");
+  }
+
+
+  /* =========================================================
      FINALIZE MARRIAGE
   ========================================================= */
 
   if (finalizeBtn) {
+
     finalizeBtn.addEventListener(
       "click",
       () => {
+
         if (
           !nameVerified ||
           !fingerprintVerified
@@ -802,38 +1125,75 @@ document.addEventListener("DOMContentLoaded", () => {
           return;
         }
 
-        certificateTimestamp =
-          getFormattedTimestamp();
 
         /*
-          If your certificate contains a timestamp
-          element, update it.
+          NEW:
+          Do NOT go directly to certificate.
+
+          Go to the ring page first.
         */
 
-        const certificateTime =
-          document.getElementById(
-            "certificateTime"
-          );
+        startRingSequence();
 
-        if (certificateTime) {
-          certificateTime.textContent =
-            certificateTimestamp;
-        }
-
-        showPage("certificate");
-
-        /*
-          Create the manual continuation button.
-
-          NO automatic timeout here.
-
-          The certificate will stay visible
-          until HE clicks the button.
-        */
-
-        createCertificateContinueButton();
       }
     );
+  }
+
+
+  /* =========================================================
+     PAGE 6 — CERTIFICATE CONTINUE
+     
+     Certificate stays on screen until
+     HE presses the button.
+  ========================================================= */
+
+  if (certificateContinue) {
+
+    certificateContinue.addEventListener(
+      "click",
+      () => {
+
+        showPartyPage();
+
+      }
+    );
+  }
+
+
+  /* =========================================================
+     PARTY PAGE
+  ========================================================= */
+
+  function showPartyPage() {
+
+    if (partyStarted) {
+      return;
+    }
+
+
+    partyStarted = true;
+
+
+    showPage("party");
+
+
+    startConfetti();
+
+
+    /*
+      Gift appears after 1.5 seconds.
+    */
+
+    setTimeout(() => {
+
+      if (giftReveal) {
+
+        giftReveal.classList.remove(
+          "hidden"
+        );
+      }
+
+    }, 1500);
   }
 
 
@@ -842,104 +1202,136 @@ document.addEventListener("DOMContentLoaded", () => {
   ========================================================= */
 
   function startConfetti() {
+
     if (!confettiContainer) {
       return;
     }
 
+
     confettiContainer.innerHTML = "";
+
 
     const pieces = 90;
 
-    for (let i = 0; i < pieces; i++) {
+
+    for (
+      let i = 0;
+      i < pieces;
+      i++
+    ) {
+
       const piece =
-        document.createElement("span");
+        document.createElement(
+          "span"
+        );
+
 
       piece.className =
         "confetti-piece";
 
+
       const randomLeft =
         Math.random() * 100;
+
 
       const randomDelay =
         Math.random() * 2;
 
+
       const randomDuration =
-        2.5 + Math.random() * 3;
+        2.5 +
+        Math.random() * 3;
+
 
       const randomRotation =
         Math.random() * 360;
 
+
       piece.style.left =
         `${randomLeft}%`;
+
 
       piece.style.animationDelay =
         `${randomDelay}s`;
 
+
       piece.style.animationDuration =
         `${randomDuration}s`;
+
 
       piece.style.transform =
         `rotate(${randomRotation}deg)`;
 
-      /*
-        A few different shapes/sizes.
-      */
 
       const size =
-        5 + Math.random() * 8;
+        5 +
+        Math.random() * 8;
+
 
       piece.style.width =
         `${size}px`;
 
+
       piece.style.height =
         `${size * 1.4}px`;
+
 
       confettiContainer.appendChild(
         piece
       );
     }
 
-    /*
-      Clean up after animation.
-    */
 
     setTimeout(() => {
+
       if (confettiContainer) {
-        confettiContainer.innerHTML = "";
+
+        confettiContainer.innerHTML =
+          "";
       }
+
     }, 7000);
   }
 
 
   /* =========================================================
-     PAGE 6 — OPEN GIFT
+     OPEN GIFT
   ========================================================= */
 
   if (openGift) {
+
     openGift.addEventListener(
       "click",
       () => {
+
         if (giftOpened) {
           return;
         }
 
+
         giftOpened = true;
+
 
         showPage("gift");
 
+
         startKisses();
 
+
         /*
-          The final message appears after
+          Final message appears after
           2 seconds.
         */
 
         setTimeout(() => {
+
           if (kissMessage) {
+
             kissMessage.classList.remove(
               "hidden"
             );
           }
+
         }, 2000);
       }
     );
@@ -947,57 +1339,87 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
   /* =========================================================
-     PAGE 7 — FLOATING KISSES
+     FLOATING KISSES
   ========================================================= */
 
   function startKisses() {
+
     if (!kissContainer) {
       return;
     }
 
+
     kissContainer.innerHTML = "";
 
+
     /*
-      Initial kisses
+      Initial kisses.
     */
 
-    for (let i = 0; i < 25; i++) {
+    for (
+      let i = 0;
+      i < 25;
+      i++
+    ) {
+
       createKiss(true);
     }
 
-    /*
-      Keep generating kisses.
-    */
 
     let kissCount = 0;
 
+
     const kissInterval =
       setInterval(() => {
-        if (currentPage !== "gift") {
-          clearInterval(kissInterval);
+
+        if (
+          currentPage !==
+          "gift"
+        ) {
+
+          clearInterval(
+            kissInterval
+          );
+
           return;
         }
 
+
         createKiss(false);
+
 
         kissCount++;
 
-        if (kissCount >= 80) {
-          clearInterval(kissInterval);
+
+        if (
+          kissCount >= 80
+        ) {
+
+          clearInterval(
+            kissInterval
+          );
         }
+
       }, 350);
   }
 
 
   function createKiss(initial) {
+
     if (!kissContainer) {
       return;
     }
 
-    const kiss =
-      document.createElement("span");
 
-    kiss.className = "floating-kiss";
+    const kiss =
+      document.createElement(
+        "span"
+      );
+
+
+    kiss.className =
+      "floating-kiss";
+
 
     kiss.textContent = [
       "💋",
@@ -1012,85 +1434,106 @@ document.addEventListener("DOMContentLoaded", () => {
       )
     ];
 
+
     const left =
       Math.random() * 100;
 
+
     const size =
-      18 + Math.random() * 24;
+      18 +
+      Math.random() * 24;
+
 
     const duration =
-      4 + Math.random() * 5;
+      4 +
+      Math.random() * 5;
+
 
     const delay =
       initial
         ? Math.random() * 4
         : 0;
 
+
     kiss.style.left =
       `${left}%`;
+
 
     kiss.style.fontSize =
       `${size}px`;
 
+
     kiss.style.animationDuration =
       `${duration}s`;
 
+
     kiss.style.animationDelay =
       `${delay}s`;
+
 
     kissContainer.appendChild(
       kiss
     );
 
-    /*
-      Remove it after animation so the DOM
-      doesn't become unnecessarily huge.
-    */
 
     setTimeout(() => {
+
       kiss.remove();
-    }, (duration + delay) * 1000 + 500);
+
+    }, (
+      duration +
+      delay
+    ) * 1000 + 500);
   }
 
 
   /* =========================================================
-     RESET / SAFETY
+     RESIZE SAFETY
   ========================================================= */
 
   window.addEventListener(
     "resize",
     () => {
-      /*
-        If the moving button is currently outside
-        the viewport after resizing, bring it back.
-      */
 
       if (
-        currentPage === "decision" &&
+        currentPage ===
+        "decision" &&
         letMeBreathe
       ) {
+
         const rect =
           letMeBreathe.getBoundingClientRect();
 
+
         if (
-          rect.right > window.innerWidth ||
-          rect.bottom > window.innerHeight
+          rect.right >
+            window.innerWidth ||
+          rect.bottom >
+            window.innerHeight
         ) {
+
           moveBreathingButton();
         }
       }
 
+
       if (
-        currentPage === "terms" &&
+        currentPage ===
+        "terms" &&
         disagreeTerms
       ) {
+
         const rect =
           disagreeTerms.getBoundingClientRect();
 
+
         if (
-          rect.right > window.innerWidth ||
-          rect.bottom > window.innerHeight
+          rect.right >
+            window.innerWidth ||
+          rect.bottom >
+            window.innerHeight
         ) {
+
           moveDisagreeButton();
         }
       }
@@ -1103,4 +1546,5 @@ document.addEventListener("DOMContentLoaded", () => {
   ========================================================= */
 
   showPage("decision");
+
 });
