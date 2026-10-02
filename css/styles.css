@@ -776,6 +776,8 @@ h3 {
     border 0.2s ease,
     box-shadow 0.2s ease;
 
+  appearance: none;
+
   -webkit-appearance: none;
 }
 
