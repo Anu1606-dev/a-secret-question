@@ -1,642 +1,294 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#8f1d2c" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/styles.css" />
+  <title>Registry of Important Life Decisions 💍</title>
+</head>
 
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1.0"
-    />
+<body>
+  <div class="wedding-decoration decoration-left">❀</div>
+  <div class="wedding-decoration decoration-right">❀</div>
 
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <main class="app">
 
-    <link
-      href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Quicksand:wght@400;500;600;700&display=swap"
-      rel="stylesheet"
-    />
+    <!-- PAGE 1 -->
+    <section class="page active" id="page-decision">
+      <div class="document-card decision-card">
+        <p class="official-label">REGISTRY OF IMPORTANT LIFE DECISIONS</p>
+        <div class="ornament">❦</div>
 
-    <link rel="stylesheet" href="css/styles.css" />
+        <p class="date-label">Today is</p>
+        <h1 id="currentDate">--.--.----</h1>
+        <p class="current-time" id="currentTime">--:--:--</p>
 
-    <title>Registry of Important Life Decisions 💍</title>
-  </head>
+        <div class="divider"><span>◆</span></div>
 
-  <body>
+        <h2>Are you ready for the<br />biggest decision of your life?</h2>
 
-    <!-- Decorative wedding elements -->
-    <div class="wedding-decoration decoration-left">❀</div>
-    <div class="wedding-decoration decoration-right">❀</div>
+        <p class="decision-subtitle">
+          Please think carefully before proceeding.<br />
+          This decision may be irreversible. 👀
+        </p>
 
-    <main class="app">
-
-      <!-- =========================================
-           PAGE 1 — THE BIG DECISION
-      ========================================== -->
-
-      <section class="page active" id="page-decision">
-
-        <div class="document-card decision-card">
-
-          <p class="official-label">
-            REGISTRY OF IMPORTANT LIFE DECISIONS
-          </p>
-
-          <div class="ornament">❦</div>
-
-          <p class="date-label">
-            Today is
-          </p>
-
-          <h1 id="currentDate">
-            01.10.2026
-          </h1>
-
-          <div class="divider">
-            <span>◆</span>
-          </div>
-
-          <h2>
-            Are you ready for the<br />
-            biggest decision of your life?
-          </h2>
-
-          <p class="decision-subtitle">
-            Please think carefully before proceeding.
-            <br />
-            This decision may be irreversible. 👀
-          </p>
-
-          <div class="decision-buttons">
-
-            <button
-              class="btn btn-primary"
-              id="obviouslyYes"
-            >
-              Obviously Yes ❤️
-            </button>
-
-            <button
-              class="btn btn-secondary"
-              id="letMeBreathe"
-            >
-              Let Me Breathe 😰
-            </button>
-
-          </div>
-
-          <p
-            class="decision-warning"
-            id="decisionWarning"
-          ></p>
-
-          <p class="document-number">
-            Document No. AS/DP/2026/∞
-          </p>
-
+        <div class="decision-buttons" id="decisionButtons">
+          <button class="btn btn-primary" id="obviouslyYes">Obviously Yes ❤️</button>
+          <button class="btn btn-secondary" id="letMeBreathe">Let Me Breathe 😰</button>
         </div>
 
-      </section>
+        <p class="decision-warning" id="decisionWarning"></p>
+        <p class="document-number">Document No. AS/DP/2026/∞</p>
+      </div>
+    </section>
 
+    <!-- PAGE 2 -->
+    <section class="page" id="page-declaration">
+      <div class="document-card declaration-card">
+        <p class="official-label">OFFICIAL DECLARATION</p>
+        <div class="ornament">❦</div>
+        <h2>Marriage Declaration</h2>
 
-      <!-- =========================================
-           PAGE 2 — MARRIAGE DECLARATION
-      ========================================== -->
-
-      <section class="page" id="page-declaration">
-
-        <div class="document-card declaration-card">
-
-          <p class="official-label">
-            OFFICIAL DECLARATION
+        <div class="declaration-text">
+          <p>
+            I, <strong>Mr. Debangan Paulchowdhury</strong>, being fully aware of the
+            consequences of my actions, hereby acknowledge that I have voluntarily
+            entered into a lifetime arrangement with <strong>Ms. Anushka Sarkar</strong>.
           </p>
 
-          <div class="ornament">❦</div>
+          <p>
+            This arrangement shall involve unlimited conversations, unnecessary arguments,
+            random teasing, food dates, emotional support, occasional nonsense and a
+            suspicious amount of love.
+          </p>
 
-          <h2>
-            Marriage Declaration
-          </h2>
+          <p>
+            I understand that this agreement may result in me being permanently associated
+            with one particular girl who may occasionally be dramatic, annoying, adorable
+            and absolutely convinced that she is right.
+          </p>
 
-          <div class="declaration-text">
+          <p class="declaration-final">
+            However, before this arrangement can be officially processed,
+            <strong>Ms. Anushka Sarkar has a few conditions.</strong>
+          </p>
 
-            <p>
-              I, <strong>Mr. Debangan Paulchowdhury</strong>,
-              being fully aware of the consequences of my actions,
-              hereby acknowledge that I have voluntarily entered into
-              a lifetime arrangement with
-              <strong>Ms. Anushka Sarkar</strong>.
-            </p>
+          <p class="small-note">
+            You will have to agree to them before proceeding.<br />
+            <strong>No negotiations will be entertained. 😌</strong>
+          </p>
+        </div>
 
-            <p>
-              This arrangement shall involve unlimited conversations,
-              unnecessary arguments, random teasing, food dates,
-              emotional support, occasional nonsense and a suspicious
-              amount of love.
-            </p>
+        <button class="btn btn-primary continue-btn" id="declarationContinue">
+          Proceed to Terms &amp; Conditions →
+        </button>
+      </div>
+    </section>
 
-            <p>
-              I understand that this agreement may result in me being
-              permanently associated with one particular girl who may
-              occasionally be dramatic, annoying, adorable and
-              absolutely convinced that she is right.
-            </p>
+    <!-- PAGE 3 -->
+    <section class="page" id="page-terms">
+      <div class="document-card terms-card">
+        <p class="official-label">ANNEXURE A</p>
+        <div class="ornament">❦</div>
+        <h2>Marriage Terms &amp; Conditions</h2>
 
-            <p class="declaration-final">
-              However, before this arrangement can be officially
-              processed, <strong>Ms. Anushka Sarkar has a few
-              conditions.</strong>
-            </p>
+        <p class="terms-intro">
+          Applicable to:
+          <strong>Ms. Anushka Sarkar &amp; Mr. Debangan Paulchowdhury</strong>
+        </p>
 
-            <p class="small-note">
-              You will have to agree to them before proceeding.
-              <br />
-              <strong>No negotiations will be entertained. 😌</strong>
-            </p>
+        <div class="terms-list">
+          <article class="term"><span class="term-number">01</span><p><strong>The Food Clause 🍚</strong><br />
+            Mr. Debangan agrees that whenever Ms. Anushka says <em>“I'm not hungry”</em>,
+            this statement may be temporary and shall not prevent her from eating from his plate.</p></article>
 
-          </div>
+          <article class="term"><span class="term-number">02</span><p><strong>The Reply Clause 📱</strong><br />
+            All messages from Ms. Anushka shall be acknowledged within a reasonable husband-approved
+            time limit. <em>“Sorry, I was busy”</em> may be accepted only after appropriate investigation. 👀</p></article>
 
-          <button
-            class="btn btn-primary continue-btn"
-            id="declarationContinue"
-          >
-            Proceed to Terms & Conditions →
+          <article class="term"><span class="term-number">03</span><p><strong>The Argument Clause 😤</strong><br />
+            In the event of disagreement, Mr. Debangan is advised to remain calm, listen carefully
+            and remember that <em>“Okay Anu, you're right.”</em> may significantly reduce the duration of the dispute.</p></article>
+
+          <article class="term"><span class="term-number">04</span><p><strong>The Hug Clause 🫂</strong><br />
+            Ms. Anushka shall have unlimited access to hugs, cuddles and other forms of husband-related
+            affection, with no daily quota and no cancellation policy.</p></article>
+
+          <article class="term"><span class="term-number">05</span><p><strong>The Photography Clause 📸</strong><br />
+            If Ms. Anushka says <em>“Just one picture.”</em>, Mr. Debangan shall understand that the
+            actual number may range anywhere between 1 and 147.</p></article>
+
+          <article class="term"><span class="term-number">06</span><p><strong>The Spontaneous Plan Clause 🛍️</strong><br />
+            Mr. Debangan agrees to occasionally participate in plans beginning with
+            <em>“Let's just go somewhere...”</em> without demanding a complete itinerary.</p></article>
+
+          <article class="term"><span class="term-number">07</span><p><strong>The Memory Clause 🧠</strong><br />
+            Mr. Debangan shall make reasonable efforts to remember important dates, conversations
+            and tiny details previously mentioned by Ms. Anushka.</p></article>
+
+          <article class="term"><span class="term-number">08</span><p><strong>The Emergency Support Clause 🍫</strong><br />
+            In situations involving sadness, stress, overthinking or unexplained irritation,
+            appropriate levels of attention, reassurance, food and hugs shall be provided.</p></article>
+
+          <article class="term"><span class="term-number">09</span><p><strong>The Lifetime Clause ❤️</strong><br />
+            Regardless of arguments, bad days, distance or general chaos, both parties agree to
+            choose each other, communicate honestly and take care of each other.</p></article>
+
+          <article class="term"><span class="term-number">10</span><p><strong>The Final Clause 💍</strong><br />
+            Mr. Debangan Paulchowdhury voluntarily accepts the permanent position of
+            <strong>Anushka's Husband</strong>. The position includes unlimited love, occasional
+            harassment, random surprises and lifelong companionship. <strong>No resignation option.</strong></p></article>
+        </div>
+
+        <div class="official-notice">
+          <strong>OFFICIAL NOTICE</strong>
+          <p>
+            Failure to comply may result in extra hugs, unnecessary teasing, dramatic complaints,
+            stolen food and being reminded that <em>“I told you so.”</em> 😂
+          </p>
+        </div>
+
+        <div class="terms-actions" id="termsActions">
+          <button class="btn btn-primary" id="agreeTerms">I AGREE ❤️</button>
+          <button class="btn btn-secondary" id="disagreeTerms">I DISAGREE</button>
+        </div>
+
+        <p class="terms-message" id="termsMessage"></p>
+      </div>
+    </section>
+
+    <!-- PAGE 4 -->
+    <section class="page" id="page-registration">
+      <div class="document-card registration-card">
+        <p class="official-label">REGISTRATION OFFICE</p>
+        <div class="ornament">❦</div>
+        <h2>Identity Verification</h2>
+
+        <p class="registration-intro">
+          Before this marriage can be processed,<br />
+          the groom must verify his identity.
+        </p>
+
+        <div class="verification-block">
+          <label for="fullName">✍️ Sign here, Mr. Debangan</label>
+          <input type="text" id="fullName" placeholder="Enter your full name" autocomplete="off" />
+          <p class="verification-message" id="nameMessage"></p>
+        </div>
+
+        <div class="verification-block">
+          <p class="fingerprint-label">🖐️ And your fingerprint here...</p>
+
+          <button class="fingerprint" id="fingerprintBtn" aria-label="Fingerprint verification">
+            <span>🖐️</span>
+            <small>CLICK TO SCAN</small>
           </button>
 
+          <div class="scan-progress hidden" id="scanProgress">
+            <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+            <p id="scanText">Scanning...</p>
+          </div>
+
+          <p class="verification-message" id="fingerprintMessage"></p>
         </div>
 
-      </section>
+        <button class="btn btn-primary finalize-btn hidden" id="finalizeBtn">
+          FINALIZE MARRIAGE 💍
+        </button>
+      </div>
+    </section>
 
+    <!-- PAGE 5 -->
+    <section class="page" id="page-certificate">
+      <div class="certificate">
+        <div class="certificate-border">
+          <p class="certificate-small">THE DEPARTMENT OF ANUSHKA'S</p>
+          <p class="certificate-small">VERY IMPORTANT DECISIONS</p>
+          <div class="certificate-ornament">❦</div>
 
-      <!-- =========================================
-           PAGE 3 — TERMS & CONDITIONS
-      ========================================== -->
+          <h2>CERTIFICATE<br />OF MARRIAGE</h2>
+          <p class="certificate-text">This is to officially declare that</p>
 
-      <section class="page" id="page-terms">
+          <h3>Ms. Anushka Sarkar</h3>
+          <p class="and">&amp;</p>
+          <h3>Mr. Debangan Paulchowdhury</h3>
 
-        <div class="document-card terms-card">
-
-          <p class="official-label">
-            ANNEXURE A
+          <p class="certificate-text">
+            have successfully completed the highly legitimate and absolutely serious
           </p>
 
-          <div class="ornament">❦</div>
+          <p class="registry-title">INTERNET REGISTRY MARRIAGE PROCEDURE™</p>
 
-          <h2>
-            Marriage Terms & Conditions
-          </h2>
-
-          <p class="terms-intro">
-            Applicable to:
-            <strong>
-              Ms. Anushka Sarkar & Mr. Debangan Paulchowdhury
-            </strong>
-          </p>
-
-          <div class="terms-list">
-
-            <article class="term">
-              <span class="term-number">01</span>
-              <p>
-                <strong>The Food Clause 🍚</strong><br />
-                Mr. Debangan agrees that whenever Ms. Anushka says
-                <em>“I'm not hungry”</em>, this statement may be
-                temporary and shall not prevent her from eating from
-                his plate.
-              </p>
-            </article>
-
-            <article class="term">
-              <span class="term-number">02</span>
-              <p>
-                <strong>The Reply Clause 📱</strong><br />
-                All messages from Ms. Anushka shall be acknowledged
-                within a reasonable husband-approved time limit.
-                <em>“Sorry, I was busy”</em> may be accepted only
-                after appropriate investigation. 👀
-              </p>
-            </article>
-
-            <article class="term">
-              <span class="term-number">03</span>
-              <p>
-                <strong>The Argument Clause 😤</strong><br />
-                In the event of disagreement, Mr. Debangan is advised
-                to remain calm, listen carefully and remember that
-                <em>“Okay Anu, you're right.”</em> may significantly
-                reduce the duration of the dispute.
-              </p>
-            </article>
-
-            <article class="term">
-              <span class="term-number">04</span>
-              <p>
-                <strong>The Hug Clause 🫂</strong><br />
-                Ms. Anushka shall have unlimited access to hugs,
-                cuddles and other forms of husband-related affection,
-                with no daily quota and no cancellation policy.
-              </p>
-            </article>
-
-            <article class="term">
-              <span class="term-number">05</span>
-              <p>
-                <strong>The Photography Clause 📸</strong><br />
-                If Ms. Anushka says <em>“Just one picture.”</em>,
-                Mr. Debangan shall understand that the actual number
-                may range anywhere between 1 and 147.
-              </p>
-            </article>
-
-            <article class="term">
-              <span class="term-number">06</span>
-              <p>
-                <strong>The Spontaneous Plan Clause 🛍️</strong><br />
-                Mr. Debangan agrees to occasionally participate in
-                plans beginning with <em>“Let's just go somewhere...”</em>
-                without demanding a complete itinerary.
-              </p>
-            </article>
-
-            <article class="term">
-              <span class="term-number">07</span>
-              <p>
-                <strong>The Memory Clause 🧠</strong><br />
-                Mr. Debangan shall make reasonable efforts to remember
-                important dates, conversations and tiny details
-                previously mentioned by Ms. Anushka.
-              </p>
-            </article>
-
-            <article class="term">
-              <span class="term-number">08</span>
-              <p>
-                <strong>The Emergency Support Clause 🍫</strong><br />
-                In situations involving sadness, stress, overthinking
-                or unexplained irritation, appropriate levels of
-                attention, reassurance, food and hugs shall be provided.
-              </p>
-            </article>
-
-            <article class="term">
-              <span class="term-number">09</span>
-              <p>
-                <strong>The Lifetime Clause ❤️</strong><br />
-                Regardless of arguments, bad days, distance or general
-                chaos, both parties agree to choose each other,
-                communicate honestly and take care of each other.
-              </p>
-            </article>
-
-            <article class="term">
-              <span class="term-number">10</span>
-              <p>
-                <strong>The Final Clause 💍</strong><br />
-                Mr. Debangan Paulchowdhury voluntarily accepts the
-                permanent position of
-                <strong>Anushka's Husband</strong>.
-                The position includes unlimited love, occasional
-                harassment, random surprises and lifelong companionship.
-                <strong>No resignation option.</strong>
-              </p>
-            </article>
-
+          <div class="status">
+            <span>STATUS</span>
+            <strong>MARRIED ❤️</strong>
           </div>
 
-          <div class="official-notice">
+          <p class="certificate-final">Congratulations, Mr. Husband. 😌</p>
+          <p class="certificate-date" id="certificateDate"></p>
 
-            <strong>OFFICIAL NOTICE</strong>
-
-            <p>
-              Failure to comply may result in extra hugs,
-              unnecessary teasing, dramatic complaints, stolen food
-              and being reminded that <em>“I told you so.”</em> 😂
-            </p>
-
+          <div class="certificate-footer">
+            <span>Bride<br /><strong>Anushka Sarkar</strong></span>
+            <span>Official Seal<br />💍</span>
+            <span>Groom<br /><strong>Debangan Paulchowdhury</strong></span>
           </div>
-
-          <div class="terms-actions">
-
-            <button
-              class="btn btn-primary"
-              id="agreeTerms"
-            >
-              I AGREE ❤️
-            </button>
-
-            <button
-              class="btn btn-secondary"
-              id="disagreeTerms"
-            >
-              I DISAGREE
-            </button>
-
-          </div>
-
-          <p
-            class="terms-message"
-            id="termsMessage"
-          ></p>
-
         </div>
+      </div>
+    </section>
 
-      </section>
+    <!-- PAGE 6 -->
+    <section class="page party-page" id="page-party">
+      <div class="confetti-container" id="confettiContainer"></div>
 
+      <div class="party-content">
+        <div class="party-emojis">🎉 💍 🎊 ❤️ 🎈</div>
+        <p class="official-label">REGISTRATION SUCCESSFUL</p>
 
-      <!-- =========================================
-           PAGE 4 — REGISTRATION
-      ========================================== -->
+        <h2>You are now my<br />eligible husband. ❤️</h2>
+        <div class="party-divider">❦</div>
 
-      <section class="page" id="page-registration">
+        <p class="married-names">
+          Ms. Anushka Sarkar<br />&amp;<br />Mr. Debangan Paulchowdhury
+        </p>
 
-        <div class="document-card registration-card">
+        <p class="married-text">
+          are officially, unnecessarily,<br />
+          ridiculously and completely
+        </p>
 
-          <p class="official-label">
-            REGISTRATION OFFICE
-          </p>
+        <h3>MARRIED. 💍</h3>
 
-          <div class="ornament">❦</div>
+        <p class="party-note">
+          Please accept your new marital responsibilities with grace. 😂
+        </p>
 
-          <h2>
-            Identity Verification
-          </h2>
-
-          <p class="registration-intro">
-            Before this marriage can be processed,
-            the groom must verify his identity.
-          </p>
-
-
-          <!-- NAME -->
-
-          <div class="verification-block">
-
-            <label for="fullName">
-              ✍️ Sign here, Mr. Debangan
-            </label>
-
-            <input
-              type="text"
-              id="fullName"
-              placeholder="Enter your full name"
-              autocomplete="off"
-            />
-
-            <p
-              class="verification-message"
-              id="nameMessage"
-            ></p>
-
-          </div>
-
-
-          <!-- FINGERPRINT -->
-
-          <div class="verification-block">
-
-            <p class="fingerprint-label">
-              🖐️ And your fingerprint here...
-            </p>
-
-            <button
-              class="fingerprint"
-              id="fingerprintBtn"
-              aria-label="Fingerprint verification"
-            >
-              <span>🖐️</span>
-              <small>CLICK TO SCAN</small>
-            </button>
-
-            <div
-              class="scan-progress hidden"
-              id="scanProgress"
-            >
-              <div class="progress-bar">
-                <div class="progress-fill"></div>
-              </div>
-
-              <p id="scanText">
-                Scanning...
-              </p>
-            </div>
-
-            <p
-              class="verification-message"
-              id="fingerprintMessage"
-            ></p>
-
-          </div>
-
-
-          <button
-            class="btn btn-primary finalize-btn hidden"
-            id="finalizeBtn"
-          >
-            FINALIZE MARRIAGE 💍
-          </button>
-
+        <div class="gift-reveal hidden" id="giftReveal">
+          <p>🎁 Your gift from your beloved wife Anushka...</p>
+          <button class="btn btn-primary" id="openGift">OPEN YOUR GIFT 💌</button>
         </div>
+      </div>
+    </section>
 
-      </section>
+    <!-- PAGE 7 -->
+    <section class="page gift-page" id="page-gift">
+      <div class="kiss-container" id="kissContainer"></div>
 
+      <div class="gift-content">
+        <div class="gift-envelope">💌</div>
+        <p class="gift-label">A VERY IMPORTANT MESSAGE</p>
 
-      <!-- =========================================
-           PAGE 5 — MARRIAGE CERTIFICATE
-      ========================================== -->
+        <h2 class="kiss-message hidden" id="kissMessage">
+          Now go...<br />
+          <span>Kiss your Anu. 💋</span>
+        </h2>
+      </div>
+    </section>
 
-      <section class="page" id="page-certificate">
+  </main>
 
-        <div class="certificate">
-
-          <div class="certificate-border">
-
-            <p class="certificate-small">
-              THE DEPARTMENT OF ANUSHKA'S
-            </p>
-
-            <p class="certificate-small">
-              VERY IMPORTANT DECISIONS
-            </p>
-
-            <div class="certificate-ornament">
-              ❦
-            </div>
-
-            <h2>
-              CERTIFICATE<br />
-              OF MARRIAGE
-            </h2>
-
-            <p class="certificate-text">
-              This is to officially declare that
-            </p>
-
-            <h3>
-              Ms. Anushka Sarkar
-            </h3>
-
-            <p class="and">
-              &
-            </p>
-
-            <h3>
-              Mr. Debangan Paulchowdhury
-            </h3>
-
-            <p class="certificate-text">
-              have successfully completed the highly legitimate and
-              absolutely serious
-            </p>
-
-            <p class="registry-title">
-              INTERNET REGISTRY MARRIAGE PROCEDURE™
-            </p>
-
-            <div class="status">
-              <span>STATUS</span>
-              <strong>MARRIED ❤️</strong>
-            </div>
-
-            <p class="certificate-final">
-              Congratulations, Mr. Husband. 😌
-            </p>
-
-            <div class="certificate-footer">
-
-              <span>
-                Bride<br />
-                <strong>Anushka Sarkar</strong>
-              </span>
-
-              <span>
-                Official Seal<br />
-                💍
-              </span>
-
-              <span>
-                Groom<br />
-                <strong>Debangan Paulchowdhury</strong>
-              </span>
-
-            </div>
-
-          </div>
-
-        </div>
-
-      </section>
-
-
-      <!-- =========================================
-           PAGE 6 — PARTY
-      ========================================== -->
-
-      <section class="page party-page" id="page-party">
-
-        <div
-          class="confetti-container"
-          id="confettiContainer"
-        ></div>
-
-        <div class="party-content">
-
-          <div class="party-emojis">
-            🎉 💍 🎊 ❤️ 🎈
-          </div>
-
-          <p class="official-label">
-            REGISTRATION SUCCESSFUL
-          </p>
-
-          <h2>
-            You are now my<br />
-            eligible husband. ❤️
-          </h2>
-
-          <div class="party-divider">
-            ❦
-          </div>
-
-          <p class="married-names">
-            Ms. Anushka Sarkar
-            <br />
-            &
-            <br />
-            Mr. Debangan Paulchowdhury
-          </p>
-
-          <p class="married-text">
-            are officially, unnecessarily,
-            ridiculously and completely
-          </p>
-
-          <h3>
-            MARRIED. 💍
-          </h3>
-
-          <p class="party-note">
-            Please accept your new marital responsibilities
-            with grace. 😂
-          </p>
-
-          <div
-            class="gift-reveal hidden"
-            id="giftReveal"
-          >
-
-            <p>
-              🎁 Your gift from your beloved wife Anushka...
-            </p>
-
-            <button
-              class="btn btn-primary"
-              id="openGift"
-            >
-              OPEN YOUR GIFT 💌
-            </button>
-
-          </div>
-
-        </div>
-
-      </section>
-
-
-      <!-- =========================================
-           PAGE 7 — THE GIFT
-      ========================================== -->
-
-      <section class="page gift-page" id="page-gift">
-
-        <div
-          class="kiss-container"
-          id="kissContainer"
-        ></div>
-
-        <div class="gift-content">
-
-          <div class="gift-envelope">
-            💌
-          </div>
-
-          <p class="gift-label">
-            A VERY IMPORTANT MESSAGE
-          </p>
-
-          <h2
-            class="kiss-message hidden"
-            id="kissMessage"
-          >
-            Now go...
-            <br />
-            <span>Kiss your Anu. 💋</span>
-          </h2>
-
-        </div>
-
-      </section>
-
-    </main>
-
-    <script src="js/script.js"></script>
-
-  </body>
+  <script src="js/script.js"></script>
+</body>
 </html>
